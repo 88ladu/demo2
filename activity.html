@@ -5,10 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>活动详情 - Flowerwalk in Beijing</title>
   <style>
-    :root {
-      --ink: #17211d; --muted: #68766e; --paper: #f7f5ee;
-      --green: #285b45; --rose: #b15a62; --line: rgba(23, 33, 29, .13);
-    }
+    /* 导航栏样式 */
+        :root{--petal:#FAF8F5;--ink:#2E2E2E;--line:rgba(46,46,46,.12);}
+        header{position:fixed;top:0;left:0;width:100%;z-index:999;border-bottom:1px solid var(--line);background:rgba(250,248,245,.95);backdrop-filter:blur(10px)}
+        nav{width:95%;max-width:1200px;margin:auto;height:64px;display:flex;align-items:center;justify-content:space-between}
+        .brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink);text-decoration:none}
+        .mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--petal)}
+        .links a{color:var(--ink);text-decoration:none;font-size:14px;margin-left:20px;opacity:0.7}
+        .links a:hover{opacity:1}
+        
+        /* 布局调整：页面下移避开导航栏 */
+        .page{margin-top:64px; height: calc(100vh - 64px); display: flex; width: 100vw; overflow: hidden;}
+
+        /* 原有样式 */
+        * { box-sizing: border-box; }
     body { font-family: "PingFang SC", system-ui; background: #fdfcf9; color: var(--ink); margin: 0; padding-top: 80px; }
     .shell { width: min(800px, 90%); margin: 0 auto; }
     
@@ -33,6 +43,22 @@
 </head>
 <body>
 
+<header>
+  <nav class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark">✿</span>
+      <span>Flower Walk Beijing</span>
+    </a>
+    <div class="links">
+      <a href="index.html#map">地图</a>
+      <a href="index.html#routes">路线</a>
+      <a href="index.html#calendar">花期</a>
+      <a href="index.html#ai">AI导览</a>
+      <a href="index.html#collection">文创</a>
+    </div>
+    <button class="theme" id="theme">◐</button>
+  </nav>
+</header>  
 <div class="shell">
   <div class="poster-placeholder">在此处添加活动海报图片 (.jpg / .png)</div>
 
