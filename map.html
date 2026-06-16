@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赏花地图</title>
+    
+    <script src="https://webapi.amap.com/loader.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+            background: #f4f7ef;
+            color: #263326;
+        }
+
+        .page {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .map-wrap {
+            width: 68%;
+            height: 100%;
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .title-card {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 14px 18px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            max-width: 360px;
+        }
+
+        .title-card h1 {
+            margin: 0 0 6px;
+            font-size: 20px;
+            color: #234325;
+        }
+
+        .title-card p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #526052;
+        }
+
+        .side-panel {
+            width: 32%;
+            min-width: 340px;
+            height: 100%;
+            padding: 28px;
+            background: linear-gradient(180deg, #fbfcf7 0%, #eef4e6 100%);
+            border-left: 1px solid #dce7d1;
+            overflow-y: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: #dfead3;
+            color: #3c5f35;
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+
+        .side-panel h2 {
+            margin: 0 0 12px;
+            font-size: 26px;
+            color: #213b23;
+        }
+
+        .side-panel .sub {
+            margin: 0 0 24px;
+            color: #627062;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .info-block {
+            margin-bottom: 18px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid #dbe7cf;
+            border-radius: 16px;
+        }
+
+        .info-block h3 {
+            margin: 0 0 8px;
+            font-size: 15px;
+            color: #31552d;
+        }
+
+        .info-block p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #3e4b3e;
+        }
+
+        .hint {
+            margin-top: 24px;
+            padding: 14px;
+            border-radius: 14px;
+            background: #fff7db;
+            color: #6c5a26;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .legend {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 12px 14px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            font-size: 13px;
+            color: #485648;
+        }
+
+        .legend-line {
+            display: inline-block;
+            width: 34px;
+            height: 4px;
+            background: #2f8f46;
+            border-radius: 99px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 800px) {
+            .page {
+                flex-direction: column;
+            }
+
+            .map-wrap {
+                width: 100%;
+                height: 58vh;
+            }
+
+            .side-panel {
+                width: 100%;
+                min-width: 0;
+                height: 42vh;
+                padding: 20px;
+            }
+
+            .title-card {
+                max-width: calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="map-wrap">
+        <div id="map"></div>
+
+        <div class="title-card">
+            <h1>北京市道路绿植地图</h1>
+            <p>点击地图上的绿色道路线条，查看对应道路的绿植配置与景观设计信息。</p>
+        </div>
+
+        <div class="legend">
+            <span class="legend-line"></span>
+            可点击道路绿植信息
+        </div>
+    </div>
+
+    <aside class="side-panel" id="infoPanel">
+        <span class="badge">城市绿植信息展示 Demo</span>
+        <h2>请选择一条道路</h2>
+        <p class="sub">
+            当前示例包含 3 条北京市道路。点击地图上的绿色线条后，将在这里展示乔木、灌木、地被植物、季相特点和设计说明。
+        </p>
+
+        <div class="info-block">
+            <h3>使用说明</h3>
+            <p>你可以把示例道路替换成比赛中需要展示的真实道路，并修改对应的植物信息。</p>
+        </div>
+
+        <div class="hint">
+            如果地图没有加载，请检查高德地图 Key、安全密钥，以及高德开放平台中的域名白名单设置。
+        </div>
+    </aside>
+</div>
+
+<script>
+    console.log("JS 已经开始执行");
+    
+    // 填入的高德地图安全密钥
+    window._AMapSecurityConfig = {
+        securityJsCode: "bbfcdbd052d07eaf0aa5260bc1dc66c7" 
+    };
+
+    const roads = [
+        {
+            id: "changanjie",
+            name: "长安街示例段",
+            type: "城市主干道",
+            trees: "国槐、银杏",
+            shrubs: "大叶黄杨、月季",
+            groundcover: "麦冬、鸢尾、草坪",
+            season: "春季有花灌木点缀，夏季形成连续林荫，秋季银杏形成金黄色季相景观。",
+            description: "该道路绿化强调城市轴线秩序，以规则式行道树和中央隔离带绿化为主，体现庄重、连续、开敞的城市景观特征。",
+            path: [
+                [116.3912, 39.9073],
+                [116.3978, 39.9073],
+                [116.4056, 39.9072],
+                [116.4142, 39.9072]
+            ]
+        },
+        {
+            id: "sanlihe",
+            name: "三里河路示例段",
+            type: "生活型街道",
+            trees: "白蜡、法桐",
+            shrubs: "金叶女贞、紫叶小檗",
+            groundcover: "萱草、玉簪、草坪",
+            season: "夏季绿量较高，秋季乔木色叶变化明显，适合营造慢行友好的街道空间。",
+            description: "该道路可突出生活街区尺度，通过乔木遮阴、灌木分隔和地被补充，增强步行舒适度和街道亲和力。",
+            path: [
+                [116.3336, 39.9272],
+                [116.3338, 39.9200],
+                [116.3340, 39.9128],
+                [116.3342, 39.9055]
+            ]
+        },
+        {
+            id: "olympic",
+            name: "奥林匹克公园周边示例段",
+            type: "公园周边道路",
+            trees: "油松、白蜡、银杏",
+            shrubs: "连翘、榆叶梅、海棠",
+            groundcover: "狼尾草、景天、宿根花卉",
+            season: "春季观花，夏季观叶，秋季观色，冬季常绿树种维持基础景观骨架。",
+            description: "该道路绿化可结合公园开放空间，强化生态性、可达性和游憩体验，适合展示城市绿地系统与慢行网络的衔接。",
+            path: [
+                [116.3868, 40.0038],
+                [116.3920, 40.0068],
+                [116.3976, 40.0090],
+                [116.4040, 40.0106]
+            ]
+        }
+    ];
+
+    // 填入的高德地图 Web端 JS API Key
+    AMapLoader.load({
+        key: "1821875e38624d22f2a1666e8d108c63", 
+        version: "2.0",
+        plugins: ["AMap.Scale", "AMap.ToolBar"]
+    })
+    .then((AMap) => {
+        const map = new AMap.Map("map", {
+            zoom: 12,
+            center: [116.3974, 39.9093],
+            viewMode: "2D",
+            mapStyle: "amap://styles/normal"
+        });
+
+        map.addControl(new AMap.Scale());
+        map.addControl(new AMap.ToolBar());
+
+        roads.forEach((road) => {
+            const polyline = new AMap.Polyline({
+                path: road.path,
+                strokeColor: "#2f8f46",
+                strokeWeight: 8,
+                strokeOpacity: 0.9,
+                lineJoin: "round",
+                lineCap: "round",
+                zIndex: 50
+            });
+
+            map.add(polyline);
+
+            polyline.on("mouseover", () => {
+                polyline.setOptions({
+                    strokeColor: "#f2a900",
+                    strokeWeight: 11
+                });
+            });
+
+            polyline.on("mouseout", () => {
+                polyline.setOptions({
+                    strokeColor: "#2f8f46",
+                    strokeWeight: 8
+                });
+            });
+
+            polyline.on("click", () => {
+                showRoadInfo(road);
+                map.setFitView([polyline], false, [80, 80, 80, 80]);
+
+                polyline.setOptions({
+                    strokeColor: "#f2a900",
+                    strokeWeight: 11
+                });
+            });
+        });
+    })
+    .catch((error) => {
+        console.error("地图加载失败：", error);
+        document.getElementById("infoPanel").innerHTML = `
+            <span class="badge">地图加载失败</span>
+            <h2>请检查高德 Key</h2>
+            <p class="sub">
+                需要填写你自己的高德地图 Web JS API Key 和 securityJsCode。
+            </p>
+            <div class="hint">
+                如果已经填写仍然失败，请检查高德开放平台里的域名白名单。
+            </div>
+        `;
+    });
+
+    function showRoadInfo(road) {
+        const panel = document.getElementById("infoPanel");
+
+        panel.innerHTML = `
+            <span class="badge">${road.type}</span>
+            <h2>${road.name}</h2>
+            <p class="sub">${road.description}</p>
+
+            <div class="info-block">
+                <h3>主要乔木</h3>
+                <p>${road.trees}</p>
+            </div>
+
+            <div class="info-block">
+                <h3>主要灌木</h3>
+                <p>${road.shrubs}</p>
+            </div>
+
+            <div class="info-block">
+                <h3>地被植物</h3>
+                <p>${road.groundcover}</p>
+            </div>
+
+            <div class="info-block">
+                <h3>季相特点</h3>
+                <p>${road.season}</p>
+            </div>
+
+            <div class="hint">
+                后续可以在这里加入道路实景图、植物照片、剖面图或设计策略图。
+            </div>
+        `;
+    }
+</script>
+</body>
+</html>
