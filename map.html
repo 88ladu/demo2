@@ -6,17 +6,21 @@
     <title>赏花地图</title>
     
     <script src="https://webapi.amap.com/loader.js"></script>
-    /* 添加到原有 style 标签的最上方 */
-:root{--petal:#FAF8F5;--ink:#2E2E2E;--line:rgba(46,46,46,.12);}
-header{position:fixed;top:0;left:0;width:100%;z-index:999;border-bottom:1px solid var(--line);background:rgba(250,248,245,.95);backdrop-filter:blur(10px)}
-nav{width:95%;max-width:1200px;margin:auto;height:64px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink);text-decoration:none}
-.mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--petal)}
-.links a{color:var(--ink);text-decoration:none;font-size:14px;margin-left:20px;opacity:0.7}
-.links a:hover{opacity:1}
-/* 调整原有的 .page，防止被导航栏遮挡 */
-.page{margin-top:64px; height: calc(100vh - 64px);}
+    
     <style>
+        /* 导航栏样式 */
+        :root{--petal:#FAF8F5;--ink:#2E2E2E;--line:rgba(46,46,46,.12);}
+        header{position:fixed;top:0;left:0;width:100%;z-index:999;border-bottom:1px solid var(--line);background:rgba(250,248,245,.95);backdrop-filter:blur(10px)}
+        nav{width:95%;max-width:1200px;margin:auto;height:64px;display:flex;align-items:center;justify-content:space-between}
+        .brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink);text-decoration:none}
+        .mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--petal)}
+        .links a{color:var(--ink);text-decoration:none;font-size:14px;margin-left:20px;opacity:0.7}
+        .links a:hover{opacity:1}
+        
+        /* 布局调整：页面下移避开导航栏 */
+        .page{margin-top:64px; height: calc(100vh - 64px); display: flex; width: 100vw; overflow: hidden;}
+
+        /* 原有样式 */
         * {
             box-sizing: border-box;
         }
