@@ -115,7 +115,14 @@ $("#edu").innerHTML = edu.map(item => `
     const ai=[["周末,海棠,4月,附近,亲子","元大都海棠花溪","盛花期","海棠漫游线","自然观察 · 花瓣拓印","步行尺度舒适，花带连续，适合周末轻量漫游。"],["樱花,拍照,摄影,春天","玉渊潭公园","观赏期","樱花漫游线","摄影漫步 · 花卉写生","水岸空间与樱花层次丰富，适合构图和光影观察。"],["月季,识别,花艺,学习","国家植物园","即将进入盛花期","月季漫游线","植物识别 · 花艺体验","植物资源集中，适合系统认识花卉品种。"]];
     const products=[["Sakura Puff","樱花团子","圆滚滚的樱花精灵，头顶一枚柔软花瓣，像春天落进掌心。","#F8D5DA","#D6A9AF"],["Haton","海棠小漫","浅粉白渐变的海棠小伙伴，用叶子手脚陪你走过城市花溪。","#F7E0E0","#9FB59A"],["Rosie","月季绒球","奶油粉色月季花球，可作为挂件，也可以成为花期护照的小守护。","#F2C8C6","#C9959B"]];
     function card([t,d,i]){return `<article class="card fade"><div class="icon">${i}</div><h3>${t}</h3><p>${d}</p></article>`}
-    $("#intro").innerHTML=intro.map(card).join(""); $("#edu").innerHTML=edu.map(card).join("");
+    $("#intro").innerHTML=intro.map(card).join(""); 
+    $("#edu").innerHTML = edu.map(item => `
+    <a href="${item[3]}" class="card fade">
+        <div class="card-img" style="background-image: url('${item[2]}'); background-color: #f0f0f0;"></div>
+        <h3>${item[0]}</h3>
+        <p>${item[1]}</p>
+    </a>
+`).join("");
     function showSpot(i){$$(".spot").forEach((e,n)=>e.classList.toggle("active",n===i));const s=spots[i];$("#popup").innerHTML=`<h3>${s[0]}</h3><p>花种：${s[1]}</p><p>花期：${s[2]}</p><p>${s[4]}</p><p><b>${s[3]}</b></p>`}
     $("#spots").innerHTML=spots.map((s,i)=>`<button class="spot ${i===0?'active':''}" data-i="${i}"><b>${s[0]}</b><span>${s[1]} · ${s[2]}</span></button>`).join("");
     $("#pins").innerHTML=spots.map((s,i)=>
@@ -132,13 +139,7 @@ $("#edu").innerHTML = edu.map(item => `
     for(let i=0;i<24;i++){const b=document.createElement("span");b.className="bloom";b.style.width=b.style.height=(30+(i%5)*9)+"px";b.style.left=(4+(i*11)%88)+"%";b.style.bottom=(8+(i*17)%58)+"%";b.style.background=i%3===0?"#F3D7D7":i%3===1?"#F7E0E0":"#FAF8F5";$("#visual").appendChild(b)}
     $("#theme").onclick=()=>{document.documentElement.classList.toggle("dark");localStorage.setItem("fw-theme",document.documentElement.classList.contains("dark")?"dark":"light")}; if(localStorage.getItem("fw-theme")==="dark")document.documentElement.classList.add("dark");
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")}),{threshold:.15}); $$(".fade").forEach(e=>io.observe(e));
-    $("#edu").innerHTML = edu.map(item => `
-    <a href="${item[3]}" class="card fade">
-        <div class="card-img" style="background-image: url('${item[2]}'); background-color: #f0f0f0;"></div>
-        <h3>${item[0]}</h3>
-        <p>${item[1]}</p>
-    </a>
-`).join("");
+    
   </script>
 </body>
 </html>
