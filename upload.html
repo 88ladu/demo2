@@ -40,14 +40,7 @@
       margin: 0 auto;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(18px);
-      background: rgba(247, 245, 238, .82);
-      border-bottom: 1px solid var(--line);
-    }
+    header{position:fixed;inset:0 0 auto;z-index:20;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--petal) 82%,transparent);backdrop-filter:blur(18px)}nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px;font-weight:700}.mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--petal)}.links{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}.links a{padding:9px 13px;border-radius:999px;font-size:14px;color:color-mix(in srgb,var(--ink) 72%,transparent)}.links a:hover{background:rgba(255,255,255,.75);color:var(--ink)}.dark .links a:hover{background:rgba(255,255,255,.12)}.theme{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--ink)}
 
     .nav {
       display: flex;
