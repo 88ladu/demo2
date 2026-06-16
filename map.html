@@ -10,7 +10,7 @@
     <style>
         /* 导航栏样式 */
         :root{--petal:#FAF8F5;--ink:#2E2E2E;--line:rgba(46,46,46,.12);}
-        header{position:fixed;top:0;left:0;width:100%;z-index:999;border-bottom:1px solid var(--line);background:rgba(250,248,245,.95);backdrop-filter:blur(10px)}
+        header{position:fixed;inset:0 0 auto;z-index:20;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--petal) 82%,transparent);backdrop-filter:blur(18px)}nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px;font-weight:700}.mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--petal)}.links{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}.links a{padding:9px 13px;border-radius:999px;font-size:14px;color:color-mix(in srgb,var(--ink) 72%,transparent)}.links a:hover{background:rgba(255,255,255,.75);color:var(--ink)}.dark .links a:hover{background:rgba(255,255,255,.12)}.theme{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--ink)}
         nav{width:95%;max-width:1200px;margin:auto;height:64px;display:flex;align-items:center;justify-content:space-between}
         .brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink);text-decoration:none}
         .mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--petal)}
