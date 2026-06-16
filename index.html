@@ -44,8 +44,10 @@
     $("#intro").innerHTML=intro.map(card).join(""); $("#edu").innerHTML=edu.map(card).join("");
     function showSpot(i){$$(".spot").forEach((e,n)=>e.classList.toggle("active",n===i));const s=spots[i];$("#popup").innerHTML=`<h3>${s[0]}</h3><p>花种：${s[1]}</p><p>花期：${s[2]}</p><p>${s[4]}</p><p><b>${s[3]}</b></p>`}
     $("#spots").innerHTML=spots.map((s,i)=>`<button class="spot ${i===0?'active':''}" data-i="${i}"><b>${s[0]}</b><span>${s[1]} · ${s[2]}</span></button>`).join("");
-    $("#pins").innerHTML=spots.map((s,i)=>`<button class="pin" data-i="${i}" style="left:${s[5]}%;top:${s[6]}%">${i+1}</button>`).join(""); showSpot(0);
-    $$("#spots .spot,#pins .pin").forEach(b=>b.onclick=()=>showSpot(+b.dataset.i));
+    $("#pins").innerHTML=spots.map((s,i)=>
+  `<a href="map.html?spot=${i}" class="pin" data-i="${i}" style="left:${s[5]}%;top:${s[6]}%">${i+1}</a>`
+).join(""); showSpot(0);
+    $$("#spots .spot").forEach(b=>b.onclick=()=>showSpot(+b.dataset.i));
     $("#routesList").innerHTML=routes.map((r,i)=>`<article class="card route fade"><div class="bar" style="background:${r[4]}"></div><p class="muted">Route 0${i+1} · ${r[2]}</p><h3 class="big">${r[0]}</h3><p>${r[1]}</p><p class="muted">${r[3]}</p><button class="btn">收藏路线 →</button></article>`).join("");
     function showMonth(i){$$(".tab").forEach((e,n)=>e.classList.toggle("active",n===i));const m=months[i];$("#monthDetail").innerHTML=`<div class="eyebrow">${m[0]} · ${m[1]}</div><h3>${m[1]}花期</h3><p>${m[3]}</p><p><b>推荐地点：</b>${m[2]}</p>`}
     $("#months").innerHTML=months.map((m,i)=>`<button class="tab ${i===0?'active':''}" data-i="${i}"><span>${m[0]}</span><h3>${m[1]}</h3></button>`).join(""); $$(".tab").forEach(b=>b.onclick=()=>showMonth(+b.dataset.i)); showMonth(0);
