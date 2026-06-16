@@ -62,6 +62,24 @@
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); place-items: center; z-index: 100; }
     .modal-content { background: white; padding: 30px; border-radius: 12px; width: 320px; }
     input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid var(--line); border-radius: 6px; }
+
+    * 新增：并排布局样式 */
+  .activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .activity-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: 0.3s;
+  }
+  .activity-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+  .activity-card img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .card-content { padding: 20px; }
   </style>
 </head>
 <body>
@@ -83,16 +101,11 @@
   </nav>
 </header>  
 <div class="shell">
-  <div class="poster-placeholder">
-    <img id="poster-img" src="" alt="活动海报">
-  </div>
-
-  <div class="info-card">
-    <h1 id="title">加载中...</h1>
-    <div class="meta" id="meta"></div>
-    <p id="desc"></p>
-    <button class="btn" onclick="openModal()">立即预约</button>
-  </div>
+  <h1>美育活动中心</h1>
+  <p>探索并预约您感兴趣的城市自然美育课程</p>
+  
+  <div class="activity-grid" id="activity-grid">
+    </div>
 </div>
 
 <div class="modal" id="modal">
@@ -105,46 +118,41 @@
 </div>
 
 <script>
-  <script>
-  // 活动数据库
-  const activities = {
-    "1": {
+  const activities = [
+    {
       img: "poster1.jpg",
       title: "春日樱花绘写工作坊",
-      meta: "时间：2026年4月15日 | 地点：玉渊潭公园 | 人数：20人",
-      desc: "我们将深入城市公园，通过绘画记录下那些转瞬即逝的自然光影。"
+      meta: "4月15日 | 玉渊潭公园",
+      desc: "绘画记录自然的转瞬光影。"
     },
-    "2": {
+    {
       img: "poster2.jpg",
       title: "花间拓印·自然记录课",
-      meta: "时间：2026年5月10日 | 地点：国家植物园 | 人数：15人",
-      desc: "学习传统的植物锤染技术，通过直接敲击将花瓣的自然纹理留在织物上。"
+      meta: "5月10日 | 国家植物园",
+      desc: "植物锤染技术，留住自然的纹理。"
     }
-  };
+    // 后续只需在这里继续添加 {img, title, meta, desc} 即可自动并排
+  ];
 
-  // 页面加载时根据 URL 参数自动填充内容
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id') || "1"; // 默认显示第一个
-  const data = activities[id];
+  const grid = document.getElementById('activity-grid');
+  grid.innerHTML = activities.map(item => `
+    <div class="activity-card">
+      <img src="${item.img}" alt="${item.title}">
+      <div class="card-content">
+        <h3>${item.title}</h3>
+        <p style="font-size: 12px; color: #666;">${item.meta}</p>
+        <p>${item.desc}</p>
+        <button class="btn" onclick="openModal()">立即预约</button>
+      </div>
+    </div>
+  `).join("");
 
-  document.getElementById('poster-img').src = data.img;
-  document.getElementById('title').textContent = data.title;
-  document.getElementById('meta').textContent = data.meta;
-  document.getElementById('desc').textContent = data.desc;
-
-  // 原有的弹窗逻辑保持不变
-  function openModal() { document.getElementById('modal').style.display = 'grid'; }
-  function submitBooking() {
-    alert("预约成功！");
-    document.getElementById('modal').style.display = 'none';
-  }
-</script>
+  // 弹窗逻辑
   function openModal() { document.getElementById('modal').style.display = 'grid'; }
   function submitBooking() {
     alert("预约成功！我们将通过短信与您确认。");
     document.getElementById('modal').style.display = 'none';
   }
-</script>
 
 </body>
 </html>
