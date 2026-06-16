@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>北京城市绿化花卉导览平台</title>
+  <style>
+    :root {
+      --ink: #17211d;
+      --muted: #68766e;
+      --line: rgba(23, 33, 29, .13);
+      --paper: #f7f5ee;
+      --panel: rgba(255, 255, 255, .78);
+      --green: #285b45;
+      --leaf: #6f9a67;
+      --rose: #b15a62;
+      --gold: #c6a052;
+      --blue: #587f94;
+      --shadow: 0 22px 70px rgba(31, 45, 37, .15);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 18% 6%, rgba(198, 160, 82, .22), transparent 24rem),
+        radial-gradient(circle at 88% 20%, rgba(88, 127, 148, .18), transparent 25rem),
+        linear-gradient(135deg, #f4f2ea 0%, #fbfaf6 42%, #edf3ec 100%);
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(247, 245, 238, .82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: white;
+      border-radius: 50%;
+      background: conic-gradient(from 140deg, var(--green), var(--leaf), var(--gold), var(--rose), var(--green));
+      box-shadow: 0 8px 24px rgba(40, 91, 69, .28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 9px 12px;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover { color: var(--ink); background: rgba(255, 255, 255, .7); }
+
+    .primary-btn,
+    .ghost-btn,
+    .icon-btn {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      min-height: 42px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .primary-btn {
+      color: white;
+      background: var(--green);
+      box-shadow: 0 14px 30px rgba(40, 91, 69, .23);
+    }
+
+    .ghost-btn {
+      color: var(--ink);
+      background: rgba(255, 255, 255, .62);
+      border-color: var(--line);
+    }
+
+    .icon-btn {
+      width: 42px;
+      padding: 0;
+      color: var(--green);
+      background: rgba(255, 255, 255, .72);
+      border-color: var(--line);
+    }
+
+    .primary-btn:hover,
+    .ghost-btn:hover,
+    .icon-btn:hover { transform: translateY(-1px); box-shadow: 0 16px 30px rgba(31, 45, 37, .13); }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 460px);
+      align-items: center;
+      gap: 54px;
+      padding: 56px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.2vw, 21px);
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      max-width: 680px;
+      margin-top: 42px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--line);
+    }
+
+    .stat {
+      min-height: 102px;
+      padding: 22px;
+      background: rgba(255, 255, 255, .56);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      color: var(--green);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .feature-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .art-window {
+      position: relative;
+      min-height: 560px;
+      background:
+        linear-gradient(rgba(250, 250, 246, .14), rgba(250, 250, 246, .1)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 1200'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%23dbe7df'/%3E%3Cstop offset='.58' stop-color='%23f6efe4'/%3E%3Cstop offset='1' stop-color='%23d7e0cf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23sky)' width='900' height='1200'/%3E%3Cpath d='M0 762 C180 665 296 713 432 615 C598 496 690 454 900 505 L900 1200 L0 1200Z' fill='%238daa78' opacity='.58'/%3E%3Cpath d='M0 818 C194 722 360 830 520 728 C675 628 766 604 900 634 L900 1200 L0 1200Z' fill='%235b7d5d' opacity='.72'/%3E%3Cpath d='M90 706 L234 310 L384 706Z' fill='%23e6ddd0'/%3E%3Cpath d='M165 706 L286 372 L454 706Z' fill='%23d7cfc4'/%3E%3Cpath d='M390 700 L522 392 L648 700Z' fill='%23e5d9cc'/%3E%3Cpath d='M572 706 L674 455 L782 706Z' fill='%23d5ccb9'/%3E%3Crect x='150' y='648' width='590' height='58' fill='%23517763' opacity='.86'/%3E%3Cpath d='M108 860 C180 718 274 760 312 870 C360 734 495 733 530 884 C604 734 735 746 790 884' fill='none' stroke='%23f0c0c7' stroke-width='34' stroke-linecap='round'/%3E%3Cpath d='M75 923 C187 805 308 838 388 940 C500 804 680 808 820 936' fill='none' stroke='%23fff1f3' stroke-width='28' stroke-linecap='round' opacity='.9'/%3E%3Ccircle cx='158' cy='833' r='18' fill='%23b15a62'/%3E%3Ccircle cx='218' cy='792' r='15' fill='%23f3d1d6'/%3E%3Ccircle cx='286' cy='826' r='20' fill='%23b15a62'/%3E%3Ccircle cx='500' cy='828' r='20' fill='%23f3d1d6'/%3E%3Ccircle cx='626' cy='802' r='16' fill='%23b15a62'/%3E%3Ccircle cx='745' cy='842' r='22' fill='%23f3d1d6'/%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, .65);
+      border-radius: 8px;
+      color: white;
+      background: rgba(23, 33, 29, .58);
+      backdrop-filter: blur(14px);
+    }
+
+    .floating-card h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .floating-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, .78);
+      line-height: 1.7;
+    }
+
+    section { padding: 72px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 18px;
+    }
+
+    .map-board {
+      position: relative;
+      min-height: 440px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(23, 33, 29, .06) 1px, transparent 1px),
+        linear-gradient(rgba(23, 33, 29, .06) 1px, transparent 1px),
+        linear-gradient(135deg, #fdfbf4, #edf4ed);
+      background-size: 54px 54px, 54px 54px, auto;
+    }
+
+    .route {
+      position: absolute;
+      inset: 42px;
+    }
+
+    .route svg { width: 100%; height: 100%; }
+
+    .pin {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      background: var(--rose);
+      box-shadow: 0 10px 24px rgba(177, 90, 98, .28);
+    }
+
+    .pin span {
+      position: absolute;
+      left: 48px;
+      white-space: nowrap;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      box-shadow: 0 10px 26px rgba(31, 45, 37, .09);
+    }
+
+    .spot-a { left: 14%; top: 20%; background: var(--rose); }
+    .spot-b { left: 48%; top: 34%; background: var(--gold); }
+    .spot-c { left: 66%; top: 62%; background: var(--green); }
+    .spot-d { left: 26%; top: 68%; background: var(--blue); }
+
+    .route-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .route-item {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .58);
+    }
+
+    .route-item strong { display: block; margin-bottom: 6px; }
+    .route-item span { color: var(--muted); line-height: 1.6; }
+
+    .contribute-band {
+      padding: 0;
+      background: #17211d;
+      color: white;
+    }
+
+    .contribute-inner {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 34px;
+      align-items: start;
+      padding: 72px 0;
+    }
+
+    .contribute-copy h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      letter-spacing: 0;
+      line-height: 1.05;
+    }
+
+    .contribute-copy p {
+      color: rgba(255, 255, 255, .72);
+      line-height: 1.85;
+      font-size: 17px;
+    }
+
+    .form-panel {
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 8px;
+      padding: 24px;
+      background: rgba(255, 255, 255, .08);
+      backdrop-filter: blur(16px);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      color: rgba(255, 255, 255, .78);
+      font-size: 13px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 8px;
+      padding: 13px 14px;
+      color: white;
+      background: rgba(255, 255, 255, .08);
+      outline: none;
+    }
+
+    select option { color: #17211d; }
+    textarea { min-height: 96px; resize: vertical; }
+
+    input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, .42); }
+    input:focus, select:focus, textarea:focus { border-color: rgba(198, 160, 82, .8); }
+
+    .dropzone {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 166px;
+      border: 1px dashed rgba(255, 255, 255, .35);
+      border-radius: 8px;
+      color: rgba(255, 255, 255, .72);
+      text-align: center;
+      padding: 22px;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .dropzone input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .dropzone strong {
+      display: block;
+      color: white;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .preview {
+      display: none;
+      width: 100%;
+      margin-top: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .preview img {
+      display: block;
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .note {
+      margin: 0;
+      color: rgba(255, 255, 255, .58);
+      font-size: 13px;
+    }
+
+    .gallery-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 15px;
+      background: rgba(255, 255, 255, .56);
+      color: var(--muted);
+    }
+
+    .tab.active {
+      color: white;
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .work-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .68);
+      box-shadow: 0 18px 42px rgba(31, 45, 37, .09);
+    }
+
+    .work-image {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #e7eadf;
+    }
+
+    .work-image img,
+    .generated-art {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .generated-art {
+      position: relative;
+      background: var(--art-bg);
+    }
+
+    .generated-art::before,
+    .generated-art::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 56%;
+      background: var(--hill);
+      clip-path: ellipse(76% 48% at 50% 78%);
+    }
+
+    .generated-art::after {
+      inset: auto 0 0;
+      height: 38%;
+      background:
+        radial-gradient(circle at 16% 42%, rgba(255, 245, 248, .94) 0 13px, transparent 14px),
+        radial-gradient(circle at 28% 34%, rgba(177, 90, 98, .95) 0 10px, transparent 11px),
+        radial-gradient(circle at 52% 38%, rgba(255, 245, 248, .94) 0 15px, transparent 16px),
+        radial-gradient(circle at 72% 30%, rgba(177, 90, 98, .95) 0 12px, transparent 13px),
+        radial-gradient(circle at 84% 46%, rgba(242, 208, 115, .9) 0 10px, transparent 11px),
+        linear-gradient(120deg, rgba(63, 111, 75, .95), rgba(43, 82, 61, .95));
+      clip-path: polygon(0 38%, 100% 12%, 100% 100%, 0 100%);
+    }
+
+    .silhouette {
+      position: absolute;
+      left: 16%;
+      right: 12%;
+      top: 21%;
+      height: 37%;
+      background: var(--building);
+      clip-path: polygon(0 100%, 8% 64%, 15% 64%, 21% 32%, 27% 64%, 34% 64%, 42% 8%, 49% 64%, 55% 64%, 63% 38%, 70% 64%, 78% 64%, 88% 0, 96% 64%, 100% 64%, 100% 100%);
+      opacity: .72;
+    }
+
+    .badge {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 2;
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: white;
+      background: rgba(23, 33, 29, .62);
+      backdrop-filter: blur(12px);
+      font-size: 12px;
+    }
+
+    .work-body {
+      padding: 17px;
+    }
+
+    .work-body h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .desc {
+      color: #3d4b43;
+      line-height: 1.7;
+      margin: 12px 0 0;
+    }
+
+    footer {
+      padding: 36px 0 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 8px;
+      padding: 13px 16px;
+      color: white;
+      background: var(--green);
+      box-shadow: var(--shadow);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .map-grid,
+      .contribute-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .art-window { min-height: 430px; }
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 22px, 1180px); }
+      .nav { align-items: flex-start; padding: 12px 0; }
+      .nav-links { justify-content: flex-end; }
+      .nav-links a:not(.primary-btn) { display: none; }
+      .hero { padding-top: 34px; min-height: auto; }
+      .stats, .form-grid, .gallery { grid-template-columns: 1fr; }
+      .map-board { min-height: 360px; }
+      .pin span { display: none; }
+      .contribute-inner { padding: 54px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">✦</div>
+        <span>北京城市绿化花卉导览平台</span>
+      </div>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#map">花卉地图</a>
+        <a href="#contribute">上传作品</a>
+        <a href="#gallery">作品展</a>
+        <a class="primary-btn" href="#contribute">参与共创</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="shell hero" id="home">
+      <div>
+        <div class="eyebrow">Urban Bloom Guide</div>
+        <h1>在北京的街巷、公园与花期里，重新认识城市绿意。</h1>
+        <p class="lead">平台整合城市绿化节点、季节花期、路线导览与市民作品征集，让每一次赏花、拍摄、写生都能成为公共花园的一部分。</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#contribute">上传摄影 / 绘画作品</a>
+          <a class="ghost-btn" href="#gallery">浏览市民作品</a>
+        </div>
+        <div class="stats" aria-label="平台数据">
+          <div class="stat"><strong>48</strong><span>精选花卉观赏点</span></div>
+          <div class="stat"><strong>12</strong><span>主题漫游路线</span></div>
+          <div class="stat"><strong id="workCount">6</strong><span>已展示作品</span></div>
+        </div>
+      </div>
+      <aside class="feature-panel" aria-label="北京花卉风景示意">
+        <div class="art-window">
+          <div class="floating-card">
+            <h2>玉渊潭樱花季</h2>
+            <p>以城市天际线、公园水岸和花木层次组成的首屏视觉，延续导览平台的自然、克制与高级感。</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="shell" id="map">
+      <div class="section-head">
+        <h2>花卉地图</h2>
+        <p>用一张清晰的路线图串联北京典型花卉观赏地，用户可以从主页进入地图，也可以从作品页回到对应地点。</p>
+      </div>
+      <div class="map-grid">
+        <div class="map-board" aria-label="北京花卉路线图">
+          <div class="route">
+            <svg viewBox="0 0 800 430" role="img" aria-label="导览路线">
+              <path d="M95 85 C220 40 302 135 385 138 C492 142 512 258 610 252 C696 248 708 342 592 365 C468 389 407 319 300 338 C198 356 120 276 180 214 C238 154 130 148 95 85Z" fill="none" stroke="rgba(40,91,69,.2)" stroke-width="32" stroke-linecap="round"/>
+              <path d="M95 85 C220 40 302 135 385 138 C492 142 512 258 610 252 C696 248 708 342 592 365 C468 389 407 319 300 338 C198 356 120 276 180 214 C238 154 130 148 95 85Z" fill="none" stroke="#285b45" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 12"/>
+            </svg>
+          </div>
+          <div class="pin spot-a">1<span>玉渊潭 · 樱花</span></div>
+          <div class="pin spot-b">2<span>北海公园 · 荷花</span></div>
+          <div class="pin spot-c">3<span>奥森公园 · 花海</span></div>
+          <div class="pin spot-d">4<span>中山公园 · 郁金香</span></div>
+        </div>
+        <div class="route-list">
+          <div class="route-item"><strong>春日花径</strong><span>樱花、海棠、郁金香构成的短途路线，适合摄影投稿。</span></div>
+          <div class="route-item"><strong>水岸慢行</strong><span>沿湖岸与桥畔收集荷花、睡莲和倒影画面。</span></div>
+          <div class="route-item"><strong>城市花海</strong><span>面向写生和亲子观察，记录大尺度绿地中的季相变化。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contribute-band" id="contribute">
+      <div class="shell contribute-inner">
+        <div class="contribute-copy">
+          <div class="eyebrow">Citizen Archive</div>
+          <h2>把你看到的北京花事，上传到城市花卉档案。</h2>
+          <p>这里可以收集摄影、绘画、写生与数字创作。用户上传后，作品会立刻进入下方展区，并保存在本机浏览器中，方便演示和后续接入后台。</p>
+        </div>
+        <form class="form-panel" id="uploadForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="title">作品名称</label>
+              <input id="title" name="title" required placeholder="例如：玉渊潭晚樱">
+            </div>
+            <div class="field">
+              <label for="author">作者</label>
+              <input id="author" name="author" required placeholder="例如：林间来信">
+            </div>
+            <div class="field">
+              <label for="type">作品类型</label>
+              <select id="type" name="type">
+                <option>摄影</option>
+                <option>绘画</option>
+                <option>数字创作</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="place">拍摄 / 创作地点</label>
+              <input id="place" name="place" required placeholder="例如：北海公园">
+            </div>
+            <div class="field full">
+              <label for="description">作品说明</label>
+              <textarea id="description" name="description" placeholder="记录花卉品种、时间、路线或创作灵感"></textarea>
+            </div>
+            <div class="field full">
+              <label for="imageInput">上传图片</label>
+              <div class="dropzone">
+                <input id="imageInput" name="imageInput" type="file" accept="image/*" required>
+                <div>
+                  <strong>点击选择摄影或绘画作品</strong>
+                  <span>支持常见图片格式，上传后将在作品展即时展示</span>
+                </div>
+              </div>
+              <div class="preview" id="preview"><img alt="作品预览"></div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <p class="note">演示版不会把文件上传到服务器，数据仅保存在当前浏览器。</p>
+            <button class="primary-btn" type="submit">发布到作品展</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="shell" id="gallery">
+      <div class="section-head">
+        <h2>市民作品展</h2>
+        <p>示例作品以北京花卉风景为主题，覆盖摄影、绘画和数字创作；新增上传会自动排在最前方。</p>
+      </div>
+      <div class="gallery-controls">
+        <div class="tabs" aria-label="作品筛选">
+          <button class="tab active" data-filter="全部">全部</button>
+          <button class="tab" data-filter="摄影">摄影</button>
+          <button class="tab" data-filter="绘画">绘画</button>
+          <button class="tab" data-filter="数字创作">数字创作</button>
+        </div>
+        <button class="ghost-btn" id="clearLocal" type="button">清空本机上传</button>
+      </div>
+      <div class="gallery" id="galleryGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">北京城市绿化花卉导览平台 · 花期导览、市民共创与城市绿意档案</div>
+  </footer>
+
+  <div class="toast" id="toast">作品已加入展区</div>
+
+  <script>
+    const sampleWorks = [
+      {
+        title: "玉渊潭的樱花水岸",
+        author: "平台示例",
+        type: "摄影",
+        place: "玉渊潭公园",
+        description: "春日湖岸、樱花与城市轮廓交叠，适合作为赏花路线封面。",
+        art: {
+          bg: "linear-gradient(160deg, #d9e7e8 0%, #fff3f1 46%, #dbe7cf 100%)",
+          hill: "linear-gradient(130deg, #7fa071, #3f6f51)",
+          building: "linear-gradient(180deg, #c8bdb0, #7c8c80)"
+        }
+      },
+      {
+        title: "中山公园郁金香写生",
+        author: "平台示例",
+        type: "绘画",
+        place: "中山公园",
+        description: "以低饱和色块表现花坛秩序，强调皇家园林轴线与春季色彩。",
+        art: {
+          bg: "linear-gradient(150deg, #efe7d7 0%, #f8f2e8 48%, #d8dfc5 100%)",
+          hill: "linear-gradient(120deg, #caa757, #6f8e5d)",
+          building: "linear-gradient(180deg, #b15a62, #7d6c54)"
+        }
+      },
+      {
+        title: "北海荷风",
+        author: "平台示例",
+        type: "摄影",
+        place: "北海公园",
+        description: "荷叶层叠、白塔远影和水面反光构成夏季路线记忆点。",
+        art: {
+          bg: "linear-gradient(160deg, #d7e6ec 0%, #f4f1e5 55%, #bfd5c5 100%)",
+          hill: "linear-gradient(140deg, #789e88, #2f6b5d)",
+          building: "linear-gradient(180deg, #eee8dc, #9ca79c)"
+        }
+      },
+      {
+        title: "奥森花海漫游",
+        author: "平台示例",
+        type: "数字创作",
+        place: "奥林匹克森林公园",
+        description: "用几何化地景表现开阔花海，适合平台活动海报和线上展览。",
+        art: {
+          bg: "linear-gradient(155deg, #dfe8d8 0%, #f7f4e7 45%, #d9e1ed 100%)",
+          hill: "linear-gradient(130deg, #85a56d, #406d62)",
+          building: "linear-gradient(180deg, #587f94, #425e62)"
+        }
+      },
+      {
+        title: "元大都海棠溪",
+        author: "平台示例",
+        type: "绘画",
+        place: "元大都城垣遗址公园",
+        description: "海棠花枝与步道形成柔和纵深，适合记录社区绿化景观。",
+        art: {
+          bg: "linear-gradient(155deg, #e7ded5 0%, #fff5f2 48%, #d6e2d3 100%)",
+          hill: "linear-gradient(130deg, #94a96e, #526e51)",
+          building: "linear-gradient(180deg, #d7b4b8, #84676b)"
+        }
+      },
+      {
+        title: "景山牡丹晨光",
+        author: "平台示例",
+        type: "摄影",
+        place: "景山公园",
+        description: "牡丹近景与古建剪影相连，呈现北京花卉景观的历史层次。",
+        art: {
+          bg: "linear-gradient(150deg, #eadfce 0%, #f9efe3 50%, #d8e5d6 100%)",
+          hill: "linear-gradient(120deg, #9a8750, #566f48)",
+          building: "linear-gradient(180deg, #b65a4f, #64473e)"
+        }
+      }
+    ];
+
+    const storageKey = "beijing-flower-gallery";
+    const galleryGrid = document.querySelector("#galleryGrid");
+    const workCount = document.querySelector("#workCount");
+    const toast = document.querySelector("#toast");
+    const form = document.querySelector("#uploadForm");
+    const imageInput = document.querySelector("#imageInput");
+    const preview = document.querySelector("#preview");
+    let uploadedImage = "";
+    let activeFilter = "全部";
+
+    function getLocalWorks() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveLocalWorks(works) {
+      localStorage.setItem(storageKey, JSON.stringify(works));
+    }
+
+    function allWorks() {
+      return [...getLocalWorks(), ...sampleWorks];
+    }
+
+    function renderGallery() {
+      const works = allWorks().filter((work) => activeFilter === "全部" || work.type === activeFilter);
+      galleryGrid.innerHTML = works.map((work) => {
+        const image = work.image
+          ? `<img src="${work.image}" alt="${work.title}">`
+          : `<div class="generated-art" style="--art-bg:${work.art.bg};--hill:${work.art.hill};--building:${work.art.building};"><span class="silhouette"></span></div>`;
+
+        return `
+          <article class="work-card" data-type="${work.type}">
+            <div class="work-image">
+              <span class="badge">${work.type}</span>
+              ${image}
+            </div>
+            <div class="work-body">
+              <h3>${escapeHtml(work.title)}</h3>
+              <div class="meta">${escapeHtml(work.place)} · ${escapeHtml(work.author)}</div>
+              <p class="desc">${escapeHtml(work.description || "这位用户还没有填写作品说明。")}</p>
+            </div>
+          </article>
+        `;
+      }).join("");
+      workCount.textContent = allWorks().length;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files && imageInput.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        uploadedImage = reader.result;
+        preview.style.display = "block";
+        preview.querySelector("img").src = uploadedImage;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!uploadedImage) {
+        showToast("请先选择一张作品图片");
+        return;
+      }
+      const data = new FormData(form);
+      const work = {
+        title: data.get("title"),
+        author: data.get("author"),
+        type: data.get("type"),
+        place: data.get("place"),
+        description: data.get("description"),
+        image: uploadedImage,
+        createdAt: Date.now()
+      };
+      saveLocalWorks([work, ...getLocalWorks()]);
+      form.reset();
+      uploadedImage = "";
+      preview.style.display = "none";
+      activeFilter = "全部";
+      document.querySelectorAll(".tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.filter === "全部"));
+      renderGallery();
+      document.querySelector("#gallery").scrollIntoView({ behavior: "smooth" });
+      showToast("作品已加入展区");
+    });
+
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        activeFilter = tab.dataset.filter;
+        document.querySelectorAll(".tab").forEach((item) => item.classList.toggle("active", item === tab));
+        renderGallery();
+      });
+    });
+
+    document.querySelector("#clearLocal").addEventListener("click", () => {
+      localStorage.removeItem(storageKey);
+      renderGallery();
+      showToast("已清空本机上传作品");
+    });
+
+    renderGallery();
+  </script>
+</body>
+</html>
