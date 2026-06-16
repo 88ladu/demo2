@@ -121,11 +121,11 @@
     }
 
     h1 {
-      margin: 0;
+      margin: 40px 0 0 0; /* 增加顶部间距，避开导航栏 */
       max-width: 760px;
-      font-size: clamp(42px, 7vw, 86px);
-      line-height: .98;
-      letter-spacing: 0;
+      font-size: clamp(36px, 5vw, 64px); /* 略微减小最大字号，更显精致 */
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
 
     .lead {
@@ -143,12 +143,13 @@
       margin-top: 34px;
     }
 
+    /* 确保 stats 布局依然是 3 列，但更新内容 */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       max-width: 680px;
-      margin-top: 42px;
+      margin-top: 54px; /* 增加与上方文本的间距 */
       overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -633,28 +634,30 @@
 
   <main>
     <section class="shell hero" id="home">
-      <div>
-        <h1>在北京的街巷、公园与花期里，重新认识城市绿意。</h1>
-        <p class="lead">整合城市花卉展览、市民作品征集，让每一次赏花、拍摄、写生都能成为公共花园的一部分。</p>
-        <div class="hero-actions">
-          <a class="primary-btn" href="#contribute">上传摄影 / 绘画作品</a>
-          <a class="ghost-btn" href="#gallery">浏览市民作品</a>
-        </div>
-        <div class="stats" aria-label="平台数据">
-          <div class="stat"><strong>48</strong><span>精选花卉观赏点</span></div>
-          <div class="stat"><strong>12</strong><span>主题漫游路线</span></div>
-          <div class="stat"><strong id="workCount">6</strong><span>已展示作品</span></div>
-        </div>
+  <div>
+    <h1>在北京的街巷、公园与花期里，<br>重新认识城市绿意。</h1>
+    <p class="lead">整合城市花卉展览、市民作品征集，让每一次赏花、拍摄、写生都能成为公共花园的一部分。</p>
+    <div class="hero-actions">
+      <a class="primary-btn" href="#contribute">上传摄影 / 绘画作品</a>
+      <a class="ghost-btn" href="#gallery">浏览市民作品</a>
+    </div>
+    
+    <div class="stats" aria-label="平台数据">
+      <div class="stat"><strong>48</strong><span>精选花卉观赏点</span></div>
+      <div class="stat"><strong>5</strong><span>花卉创意比赛</span></div>
+      <div class="stat"><strong id="workCount">6</strong><span>已展示作品</span></div>
+    </div>
+  </div>
+  
+  <aside class="feature-panel" aria-label="北京花卉风景示意">
+    <div class="art-window">
+      <div class="floating-card">
+        <h2>玉渊潭樱花季</h2>
+        <p>以城市天际线、公园水岸和花木层次组成的首屏视觉，延续导览平台的自然、克制与高级感。</p>
       </div>
-      <aside class="feature-panel" aria-label="北京花卉风景示意">
-        <div class="art-window">
-          <div class="floating-card">
-            <h2>玉渊潭樱花季</h2>
-            <p>以城市天际线、公园水岸和花木层次组成的首屏视觉，延续导览平台的自然、克制与高级感。</p>
-          </div>
-        </div>
-      </aside>
-    </section>
+    </div>
+  </aside>
+</section>
 
 
     <section class="contribute-band" id="contribute">
