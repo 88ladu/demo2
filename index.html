@@ -99,15 +99,14 @@
     const months=[["3月","樱花","玉渊潭公园、北京植物园","春天的第一条花路，适合摄影漫步和花瓣观察。"],["4月","海棠","元大都海棠花溪、陶然亭公园","花色柔和、枝形舒展，适合自然手账和花色采集。"],["5月","月季","国家植物园、北京国际鲜花港","城市园艺中最具亲和力的花卉之一，适合植物识别。"],["6月","荷花","北海公园、圆明园","水岸景观进入夏季状态，适合观察叶面、花形与倒影。"],["9月","菊花","北海公园、北京植物园","秋季花卉的色彩课堂，可结合传统文化与造型观察。"],["12月","梅花","明城墙遗址公园、香山公园","冬日花事更克制，适合寻找城市里的安静自然片段。"]];
     // 1. 确保 edu 数组的图片路径与你文件名完全一致
 const edu = [
-    ["感知花", "训练感官和观察力，从花色、气味、枝叶和生境开始认识植物。", "感知花.jpg", "detail_1.html"],
-    ["创作花", "把赏花转化为材料实验和视觉表达，形成可收藏的学习成果。", "创作花.jpg", "detail_2.html"],
-    ["传播花", "通过线上展览和线下打卡，让花卉知识在社群中流动。", "传播花.jpg", "detail_3.html"]
+    ["感知花", "训练感官和观察力，从花色、气味、枝叶和生境开始认识植物。", "感知花.jpg", "data.html"],
+    ["创作花", "把赏花转化为材料实验和视觉表达，形成可收藏的学习成果。", "创作花.jpg", "activity.html"],
+    ["传播花", "通过线上展览和线下打卡，让花卉知识在社群中流动。", "传播花.jpg", "upload.html"]
 ];
 
-// 2. 修改 edu 的渲染逻辑，使其包含图片标签
 $("#edu").innerHTML = edu.map(item => `
     <a href="${item[3]}" class="card fade">
-        <div class="card-img" style="background-image: url('${item[2]}');"></div>
+        <div class="card-img" style="background-image: url('${item[2]}'); background-color: #f0f0f0;"></div>
         <h3>${item[0]}</h3>
         <p>${item[1]}</p>
     </a>
@@ -116,13 +115,6 @@ $("#edu").innerHTML = edu.map(item => `
     const products=[["Sakura Puff","樱花团子","圆滚滚的樱花精灵，头顶一枚柔软花瓣，像春天落进掌心。","#F8D5DA","#D6A9AF"],["Haton","海棠小漫","浅粉白渐变的海棠小伙伴，用叶子手脚陪你走过城市花溪。","#F7E0E0","#9FB59A"],["Rosie","月季绒球","奶油粉色月季花球，可作为挂件，也可以成为花期护照的小守护。","#F2C8C6","#C9959B"]];
     function card([t,d,i]){return `<article class="card fade"><div class="icon">${i}</div><h3>${t}</h3><p>${d}</p></article>`}
     $("#intro").innerHTML=intro.map(card).join(""); 
-    $("#edu").innerHTML = edu.map(item => `
-    <a href="upload.html" class="card fade">
-        <div class="card-img" style="background-image: url('${item[2]}'); background-color: #f0f0f0;"></div>
-        <h3>${item[0]}</h3>
-        <p>${item[1]}</p>
-    </a>
-`).join("");
     function showSpot(i){$$(".spot").forEach((e,n)=>e.classList.toggle("active",n===i));const s=spots[i];$("#popup").innerHTML=`<h3>${s[0]}</h3><p>花种：${s[1]}</p><p>花期：${s[2]}</p><p>${s[4]}</p><p><b>${s[3]}</b></p>`}
     $("#spots").innerHTML=spots.map((s,i)=>`<button class="spot ${i===0?'active':''}" data-i="${i}"><b>${s[0]}</b><span>${s[1]} · ${s[2]}</span></button>`).join("");
     $("#pins").innerHTML=spots.map((s,i)=>
