@@ -117,7 +117,7 @@ $("#edu").innerHTML = edu.map(item => `
     function card([t,d,i]){return `<article class="card fade"><div class="icon">${i}</div><h3>${t}</h3><p>${d}</p></article>`}
     $("#intro").innerHTML=intro.map(card).join(""); 
     $("#edu").innerHTML = edu.map(item => `
-    <a href="${item[3]}" class="card fade">
+    <a href="upload.html" class="card fade">
         <div class="card-img" style="background-image: url('${item[2]}'); background-color: #f0f0f0;"></div>
         <h3>${item[0]}</h3>
         <p>${item[1]}</p>
