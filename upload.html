@@ -61,7 +61,18 @@
        .theme{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--ink)}
         nav{width:95%;max-width:1200px;margin:auto;height:64px;display:flex;align-items:center;justify-content:space-between}
         .brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink);text-decoration:none}
-        .mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);ccolor: #fff;font-size: 16px;}
+        .mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: #fff !important; /* 修复拼写错误，并确保白色文字能显示出来 */
+  font-size: 16px;
+  line-height: 1; /* 确保图标居中 */
+  flex-shrink: 0; /* 保证图标不会被压缩 */
+}
         .links a{color:var(--ink);text-decoration:none;font-size:14px;margin-left:20px;opacity:0.7}
         .links a:hover{opacity:1}
         
@@ -341,53 +352,67 @@ h1 {
     .route-item strong { display: block; margin-bottom: 6px; }
     .route-item span { color: var(--muted); line-height: 1.6; }
 
-    /* 修改这一段 */
+    /* --- 修复后的上传区域样式 --- */
 .contribute-band {
   padding: 0;
-  /* 使用浅绿色背景，与页面整体的纸质底色更协调 */
-  background: #edf3ec; 
-  /* 标题和正文改为深色，因为背景变浅了 */
-  color: #2e2e2e; 
+  background: #edf3ec !important; /* 强制覆盖背景 */
+  color: #2e2e2e !important;       /* 确保文字为深色 */
+}
+
+.contribute-inner {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 34px;
+  align-items: start;
+  padding: 72px 0;
+}
+
+.contribute-copy h2 {
+  color: #2e2e2e;
 }
 
 .contribute-copy p {
-  color: #68766e; /* 使用之前定义的 --muted 颜色，增加对比度 */
+  color: #68766e;
   line-height: 1.85;
   font-size: 17px;
 }
 
-/* 如果需要让表单在该浅色背景上更显眼，可以给 form-panel 加一点点阴影或微调透明度 */
+/* 调整表单面板，使其在浅绿背景上更清晰 */
 .form-panel {
-  border: 1px solid rgba(40, 91, 69, 0.2);
-  background: rgba(255, 255, 255, 0.5); /* 半透明白，营造毛玻璃感 */
+  background: rgba(255, 255, 255, 0.6) !important;
   backdrop-filter: blur(16px);
+  border: 1px solid rgba(40, 91, 69, 0.15) !important;
+  padding: 24px;
+  border-radius: 12px;
 }
 
-    .contribute-inner {
-      display: grid;
-      grid-template-columns: .85fr 1.15fr;
-      gap: 34px;
-      align-items: start;
-      padding: 72px 0;
-    }
+/* 修正输入框颜色，使其适应浅色背景 */
+.form-panel input, 
+.form-panel select, 
+.form-panel textarea {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(40, 91, 69, 0.2) !important;
+  color: #2e2e2e !important;
+}
 
-    .contribute-copy h2 {
-      margin: 0;
-      font-size: clamp(34px, 5vw, 58px);
-      letter-spacing: 0;
-      line-height: 1.05;
-    }
-    /* 修改上传按钮颜色，与粉色/红色系呼应 */
+/* 上传按钮配色 */
 .contribute-band .primary-btn {
-  background: #b15a62; /* 使用你的 --rose 颜色，作为视觉焦点 */
-  color: #ffffff;
+  background: #b15a62 !important; 
+  color: #ffffff !important;
 }
 
-/* 如果希望输入框聚焦时也是淡淡的粉色边框 */
+/* 聚焦时的粉色边框 */
 .contribute-band input:focus, 
 .contribute-band select:focus, 
 .contribute-band textarea:focus { 
-  border-color: #b15a62; 
+  border-color: #b15a62 !important;
+  outline: none;
+}
+
+.dropzone {
+  border: 1px dashed #b15a62 !important;
+  color: #68766e !important;
+  background: rgba(255, 255, 255, 0.4) !important;
 }
 
     .form-grid {
