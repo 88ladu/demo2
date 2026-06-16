@@ -19,15 +19,38 @@
 
         /* 原有样式 */
         * { box-sizing: border-box; }
+        html, body { margin: 0; width: 100%; height: 100%; font-family: -apple-system, sans-serif; background: #f4f7ef; color: #263326; }
+        .map-wrap { width: 68%; height: 100%; position: relative; }
+        #map { width: 100%; height: 100%; }
+        .title-card { position: absolute; top: 20px; left: 20px; z-index: 10; background: rgba(255, 255, 255, 0.92); padding: 14px 18px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); max-width: 360px; }
+        .side-panel { width: 32%; min-width: 340px; height: 100%; padding: 28px; background: linear-gradient(180deg, #fbfcf7 0%, #eef4e6 100%); border-left: 1px solid #dce7d1; overflow-y: auto; }
+        .badge { display: inline-block; padding: 5px 10px; border-radius: 999px; background: #dfead3; color: #3c5f35; font-size: 12px; margin-bottom: 14px; }
+        .info-block { margin-bottom: 18px; padding: 16px; background: rgba(255, 255, 255, 0.72); border: 1px solid #dbe7cf; border-radius: 16px; }
+        .hint { margin-top: 24px; padding: 14px; border-radius: 14px; background: #fff7db; color: #6c5a26; font-size: 13px; }
+        
+        @media (max-width: 800px) {
+            .page { flex-direction: column; height: auto; }
+            .map-wrap { width: 100%; height: 50vh; }
+            .side-panel { width: 100%; height: auto; }
+        }
     body { font-family: "PingFang SC", system-ui; background: #fdfcf9; color: var(--ink); margin: 0; padding-top: 80px; }
     .shell { width: min(800px, 90%); margin: 0 auto; }
     
-    /* 海报占位区 */
-    .poster-placeholder {
-      width: 100%; height: 450px; background: #e0e6e0; border-radius: 16px;
-      display: grid; place-items: center; color: var(--muted); font-size: 1.2rem;
-      margin-bottom: 32px;
-    }
+    /* 海报图片区域 */
+.poster-placeholder {
+  width: 100%; 
+  aspect-ratio: 3 / 4; /* 强制 3:4 比例 */
+  background: #e0e6e0; 
+  border-radius: 16px;
+  overflow: hidden; /* 确保图片超出部分不影响圆角 */
+  margin-bottom: 32px;
+}
+
+.poster-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 自动剪裁填充，保持比例不拉伸 */
+}
 
     .info-card { background: white; padding: 40px; border-radius: 16px; border: 1px solid var(--line); }
     h1 { margin-top: 0; }
@@ -60,12 +83,14 @@
   </nav>
 </header>  
 <div class="shell">
-  <div class="poster-placeholder">在此处添加活动海报图片 (.jpg / .png)</div>
+  <div class="poster-placeholder">
+    <img id="poster-img" src="" alt="活动海报">
+  </div>
 
   <div class="info-card">
-    <h1>春日樱花绘写工作坊</h1>
-    <div class="meta">时间：2026年4月15日 | 地点：玉渊潭公园西门 | 人数限制：20人</div>
-    <p>这是一个关于观察与记录的活动。我们将深入城市公园，在花期正盛时，通过绘画记录下那些转瞬即逝的自然光影。无需绘画基础，只需带上一颗热爱自然的心。</p>
+    <h1 id="title">加载中...</h1>
+    <div class="meta" id="meta"></div>
+    <p id="desc"></p>
     <button class="btn" onclick="openModal()">立即预约</button>
   </div>
 </div>
@@ -80,6 +105,40 @@
 </div>
 
 <script>
+  <script>
+  // 活动数据库
+  const activities = {
+    "1": {
+      img: "poster1.jpg",
+      title: "春日樱花绘写工作坊",
+      meta: "时间：2026年4月15日 | 地点：玉渊潭公园 | 人数：20人",
+      desc: "我们将深入城市公园，通过绘画记录下那些转瞬即逝的自然光影。"
+    },
+    "2": {
+      img: "poster2.jpg",
+      title: "花间拓印·自然记录课",
+      meta: "时间：2026年5月10日 | 地点：国家植物园 | 人数：15人",
+      desc: "学习传统的植物锤染技术，通过直接敲击将花瓣的自然纹理留在织物上。"
+    }
+  };
+
+  // 页面加载时根据 URL 参数自动填充内容
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || "1"; // 默认显示第一个
+  const data = activities[id];
+
+  document.getElementById('poster-img').src = data.img;
+  document.getElementById('title').textContent = data.title;
+  document.getElementById('meta').textContent = data.meta;
+  document.getElementById('desc').textContent = data.desc;
+
+  // 原有的弹窗逻辑保持不变
+  function openModal() { document.getElementById('modal').style.display = 'grid'; }
+  function submitBooking() {
+    alert("预约成功！");
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
   function openModal() { document.getElementById('modal').style.display = 'grid'; }
   function submitBooking() {
     alert("预约成功！我们将通过短信与您确认。");
