@@ -22,6 +22,7 @@
   gap: 24px;
 }
 
+/* 优化美育卡片样式 */
 .edu .card {
   display: flex;
   flex-direction: column;
@@ -29,6 +30,16 @@
   overflow: hidden;
   text-decoration: none;
   color: var(--ink);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* 整体过渡效果 */
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px; /* 圆角更柔和 */
+}
+
+/* 悬停时：卡片上浮并加深阴影 */
+.edu .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
 .card-img {
@@ -36,11 +47,13 @@
   height: 200px;
   background-size: cover;
   background-position: center;
-  transition: transform 0.3s ease;
+  /* 图片自带缩放过渡 */
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card:hover .card-img {
-  transform: scale(1.05);
+/* 悬停时：图片缓慢放大（视觉焦点） */
+.edu .card:hover .card-img {
+  transform: scale(1.1);
 }
 
 .edu .card h3 {
@@ -70,13 +83,7 @@
       <div><div class="eyebrow">Aesthetic Education</div><h2>从看花到学花</h2></div>
       <p>美育活动把城市花卉变成开放课堂，让观察、创作与传播构成完整参与链路。</p>
     </div>
-    <div class="cards edu" id="edu">
-      <a href="detail_1.html" class="card fade">
-        <div class="card-img" style="background-image: url('your-image-url.jpg');"></div>
-        <h3>感知花</h3>
-        <p>训练感官和观察力，从花色、气味、枝叶和生境开始认识植物。</p>
-      </a>
-      </div>
+    <div class="cards edu" id="edu"></div>
   </div>
 </section>
     <section class="soft" id="ai"><div class="wrap ai-box"><div class="fade"><div class="eyebrow">AI Flower Guide</div><h2>AI 花卉导览</h2><p class="muted">输入“周末想看花”“樱花拍照”“月季识别”等关键词，模拟生成导览建议。</p></div><div class="assistant fade"><div class="ask"><input id="query" value="我周末想看花"><button id="ask">➜</button></div><div id="answer"></div></div></div></section>
@@ -90,16 +97,17 @@
     const spots=[["玉渊潭公园","樱花","3月下旬-4月中旬","花卉写生 · 摄影漫步","北京春季最具代表性的樱花观赏地之一，适合清晨或傍晚慢行。",14,22],["元大都海棠花溪","海棠","4月","自然观察 · 花色采集","海棠花带沿城市遗址展开，适合观察花色、枝形与社区绿化关系。",50,34],["国家植物园","月季","5月-6月","植物识别 · 花艺体验","植物资源丰富，可用于花卉识别、自然教育和花艺体验课程。",24,66],["奥林匹克森林公园","四季花卉","全年","自然漫步 · 摄影","大尺度城市绿地，适合长距离漫游、摄影和季相观察。",68,62],["天坛公园","古树花卉景观","春夏秋","古树观察 · 建筑速写","古建、古树和花卉景观共同构成具有北京气质的自然课堂。",78,42]];
     const routes=[["樱花漫游线","玉渊潭 → 北京动物园 → 紫竹院","半日","水岸、花影、春日轻风","#F3D7D7"],["海棠漫游线","元大都海棠花溪 → 北土城遗址公园","2小时","遗址、花溪、社区漫步","#F7E0E0"],["月季漫游线","国家植物园 → 北京国际鲜花港","一日","识花、花艺、园艺灵感","#E7B7B9"],["四季花路","春 樱花 · 夏 荷花 · 秋 菊花 · 冬 梅花","全年","跟随花期更新城市记忆","#9FB59A"]];
     const months=[["3月","樱花","玉渊潭公园、北京植物园","春天的第一条花路，适合摄影漫步和花瓣观察。"],["4月","海棠","元大都海棠花溪、陶然亭公园","花色柔和、枝形舒展，适合自然手账和花色采集。"],["5月","月季","国家植物园、北京国际鲜花港","城市园艺中最具亲和力的花卉之一，适合植物识别。"],["6月","荷花","北海公园、圆明园","水岸景观进入夏季状态，适合观察叶面、花形与倒影。"],["9月","菊花","北海公园、北京植物园","秋季花卉的色彩课堂，可结合传统文化与造型观察。"],["12月","梅花","明城墙遗址公园、香山公园","冬日花事更克制，适合寻找城市里的安静自然片段。"]];
-    // 修改渲染 edu 的逻辑部分
+    // 1. 确保 edu 数组的图片路径与你文件名完全一致
 const edu = [
     ["感知花", "训练感官和观察力，从花色、气味、枝叶和生境开始认识植物。", "感知花.jpg", "detail_1.html"],
     ["创作花", "把赏花转化为材料实验和视觉表达，形成可收藏的学习成果。", "创作花.jpg", "detail_2.html"],
     ["传播花", "通过线上展览和线下打卡，让花卉知识在社群中流动。", "传播花.jpg", "detail_3.html"]
 ];
 
+// 2. 修改 edu 的渲染逻辑，使其包含图片标签
 $("#edu").innerHTML = edu.map(item => `
     <a href="${item[3]}" class="card fade">
-        <div class="card-img" style="background-color: #ddd;"></div>
+        <div class="card-img" style="background-image: url('${item[2]}');"></div>
         <h3>${item[0]}</h3>
         <p>${item[1]}</p>
     </a>
@@ -124,6 +132,13 @@ $("#edu").innerHTML = edu.map(item => `
     for(let i=0;i<24;i++){const b=document.createElement("span");b.className="bloom";b.style.width=b.style.height=(30+(i%5)*9)+"px";b.style.left=(4+(i*11)%88)+"%";b.style.bottom=(8+(i*17)%58)+"%";b.style.background=i%3===0?"#F3D7D7":i%3===1?"#F7E0E0":"#FAF8F5";$("#visual").appendChild(b)}
     $("#theme").onclick=()=>{document.documentElement.classList.toggle("dark");localStorage.setItem("fw-theme",document.documentElement.classList.contains("dark")?"dark":"light")}; if(localStorage.getItem("fw-theme")==="dark")document.documentElement.classList.add("dark");
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")}),{threshold:.15}); $$(".fade").forEach(e=>io.observe(e));
+    $("#edu").innerHTML = edu.map(item => `
+    <a href="${item[3]}" class="card fade">
+        <div class="card-img" style="background-image: url('${item[2]}'); background-color: #f0f0f0;"></div>
+        <h3>${item[0]}</h3>
+        <p>${item[1]}</p>
+    </a>
+`).join("");
   </script>
 </body>
 </html>
