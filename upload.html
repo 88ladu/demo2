@@ -341,11 +341,27 @@ h1 {
     .route-item strong { display: block; margin-bottom: 6px; }
     .route-item span { color: var(--muted); line-height: 1.6; }
 
-    .contribute-band {
-      padding: 0;
-      background: #17211d;
-      color: white;
-    }
+    /* 修改这一段 */
+.contribute-band {
+  padding: 0;
+  /* 使用浅绿色背景，与页面整体的纸质底色更协调 */
+  background: #edf3ec; 
+  /* 标题和正文改为深色，因为背景变浅了 */
+  color: #2e2e2e; 
+}
+
+.contribute-copy p {
+  color: #68766e; /* 使用之前定义的 --muted 颜色，增加对比度 */
+  line-height: 1.85;
+  font-size: 17px;
+}
+
+/* 如果需要让表单在该浅色背景上更显眼，可以给 form-panel 加一点点阴影或微调透明度 */
+.form-panel {
+  border: 1px solid rgba(40, 91, 69, 0.2);
+  background: rgba(255, 255, 255, 0.5); /* 半透明白，营造毛玻璃感 */
+  backdrop-filter: blur(16px);
+}
 
     .contribute-inner {
       display: grid;
@@ -361,20 +377,18 @@ h1 {
       letter-spacing: 0;
       line-height: 1.05;
     }
+    /* 修改上传按钮颜色，与粉色/红色系呼应 */
+.contribute-band .primary-btn {
+  background: #b15a62; /* 使用你的 --rose 颜色，作为视觉焦点 */
+  color: #ffffff;
+}
 
-    .contribute-copy p {
-      color: rgba(255, 255, 255, .72);
-      line-height: 1.85;
-      font-size: 17px;
-    }
-
-    .form-panel {
-      border: 1px solid rgba(255, 255, 255, .14);
-      border-radius: 8px;
-      padding: 24px;
-      background: rgba(255, 255, 255, .08);
-      backdrop-filter: blur(16px);
-    }
+/* 如果希望输入框聚焦时也是淡淡的粉色边框 */
+.contribute-band input:focus, 
+.contribute-band select:focus, 
+.contribute-band textarea:focus { 
+  border-color: #b15a62; 
+}
 
     .form-grid {
       display: grid;
