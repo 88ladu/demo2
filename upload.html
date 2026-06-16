@@ -379,20 +379,29 @@ h1 {
 
 /* 调整表单面板，使其在浅绿背景上更清晰 */
 .form-panel {
-  background: rgba(255, 255, 255, 0.6) !important;
+  background: rgba(255, 255, 255, 0.85) !important; /* 增加不透明度 */
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(40, 91, 69, 0.15) !important;
-  padding: 24px;
+  border: 1px solid rgba(40, 91, 69, 0.2) !important;
+  padding: 32px;
   border-radius: 12px;
+}
+.field label {
+  color: #2e2e2e !important; /* 关键点：标签文字设为深色 */
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
 }
 
 /* 修正输入框颜色，使其适应浅色背景 */
 .form-panel input, 
 .form-panel select, 
 .form-panel textarea {
-  background: rgba(255, 255, 255, 0.8) !important;
+  background: #ffffff !important; /* 输入框背景设为纯白，与背景区分 */
   border: 1px solid rgba(40, 91, 69, 0.2) !important;
-  color: #2e2e2e !important;
+  color: #17211d !important;      /* 输入文字为深色 */
+  padding: 12px 14px;
+  border-radius: 8px;
 }
 
 /* 上传按钮配色 */
@@ -498,10 +507,9 @@ h1 {
     }
 
     .note {
-      margin: 0;
-      color: rgba(255, 255, 255, .58);
-      font-size: 13px;
-    }
+  color: #68766e !important;
+  font-size: 12px;
+}
 
     .gallery-controls {
       display: flex;
@@ -706,7 +714,7 @@ h1 {
   <main>
     <section class="shell hero" id="home">
   <div>
-    <h1>在北京的街巷、公园与花期里，<br>重新认识城市绿意。</h1>
+    <h1>传播花</h1>
     <p class="lead">整合城市花卉展览、市民作品征集，让每一次赏花、拍摄、写生都能成为公共花园的一部分。</p>
     <div class="hero-actions">
       <a class="primary-btn" href="#contribute">上传摄影 / 绘画作品</a>
