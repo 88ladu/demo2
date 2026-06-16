@@ -15,6 +15,45 @@
     .map-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:28px}.spot-list{display:grid;gap:12px}.spot{display:flex;gap:12px;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--paper);transition:.25s}.spot.active,.spot:hover{background:var(--moss);color:white}.spot span{font-size:14px;opacity:.72}.map{position:relative;min-height:560px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:linear-gradient(90deg,rgba(83,106,80,.08) 1px,transparent 1px),linear-gradient(rgba(83,106,80,.08) 1px,transparent 1px),linear-gradient(135deg,#fbfaf5,#e7eee4);background-size:56px 56px,56px 56px,auto}.map svg{position:absolute;inset:46px;width:calc(100% - 92px);height:calc(100% - 92px)}.pin{position:absolute;width:42px;height:42px;border:2px solid white;border-radius:50%;background:var(--moss);color:white;display:grid;place-items:center;box-shadow:0 10px 26px rgba(83,106,80,.25);animation:pulse 1.8s infinite}.pin:hover{background:#a55d66}.popup{position:absolute;right:24px;bottom:24px;width:min(320px,calc(100% - 48px));padding:20px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);box-shadow:var(--shadow);color:#2E2E2E}@keyframes pulse{50%{transform:scale(1.08)}}
     .route-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}.route{min-width:420px;scroll-snap-align:start;overflow:hidden}.bar{height:8px}.route .big{font-size:30px;margin:34px 0 16px}.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.tab{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:18px;text-align:left;color:var(--ink)}.tab.active{background:var(--moss);color:white}.calendar-detail{margin-top:14px;border-radius:8px;background:var(--paper);border:1px solid var(--line);padding:24px}.edu{grid-template-columns:repeat(3,1fr)}.ai-box{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center}.assistant{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:20px;box-shadow:var(--shadow)}.ask{display:flex;gap:8px;background:color-mix(in srgb,var(--petal) 88%,white);border-radius:8px;padding:14px}.ask input{flex:1;min-height:48px;border:1px solid var(--line);border-radius:999px;background:white;padding:0 18px}.dark .ask input{background:rgba(255,255,255,.1);color:var(--ink)}.ask button{width:48px;border:0;border-radius:50%;background:var(--ink);color:var(--petal)}.result{display:flex;justify-content:space-between;gap:16px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.38);padding:15px;margin-top:10px}.result span{opacity:.55}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.product{overflow:hidden;padding:0}.product-art{height:270px;display:grid;place-items:center;position:relative}.tag{position:absolute;left:20px;top:20px;background:rgba(255,255,255,.7);padding:8px 12px;border-radius:999px;font-size:12px}.plush{width:176px;height:176px;border-radius:50%;position:relative;box-shadow:inset -18px -22px 40px rgba(0,0,0,.08),0 28px 60px rgba(46,46,46,.2);transition:.4s}.product:hover .plush{transform:scale(1.06)}.eye{position:absolute;top:76px;width:12px;height:12px;border-radius:50%;background:#2e2e2e}.eye.l{left:58px}.eye.r{right:58px}.mouth{position:absolute;left:74px;top:100px;width:30px;height:16px;border-bottom:2px solid rgba(46,46,46,.65);border-radius:0 0 999px 999px}.save{float:right;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--petal);color:var(--ink)}.save.on{background:var(--rose)}.vision{background:var(--ink);color:var(--petal);position:relative;overflow:hidden}.vision h2{font-size:clamp(40px,7vw,86px);line-height:1.02}.fade{opacity:0;transform:translateY(28px);transition:.75s cubic-bezier(.22,1,.36,1)}.fade.show{opacity:1;transform:none}footer{border-top:1px solid var(--line);padding:34px 0;color:color-mix(in srgb,var(--ink) 58%,transparent)}
     @media(max-width:900px){.links{display:none}.hero-grid,.map-layout,.ai-box{grid-template-columns:1fr}.cards,.edu,.products{grid-template-columns:1fr 1fr}.visual{min-height:430px}.tabs{grid-template-columns:repeat(3,1fr)}}@media(max-width:620px){.cards,.edu,.products,.tabs{grid-template-columns:1fr}.hero h1{font-size:58px}.route{min-width:86%}.section-head{display:block}.map{min-height:420px}}
+    /* 优化美育卡片样式 */
+.edu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.edu .card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img {
+  transform: scale(1.05);
+}
+
+.edu .card h3 {
+  margin: 20px 20px 10px;
+  font-size: 20px;
+}
+
+.edu .card p {
+  margin: 0 20px 24px;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
   </style>
 </head>
 <body>
@@ -25,7 +64,21 @@
     <section class="soft" id="map"><div class="wrap map-layout"><div class="fade"><div class="eyebrow">Blooming Map</div><h2>北京赏花地图</h2><p class="muted">点击左侧地点或地图 Marker，查看花种、花期与推荐活动。</p><div class="spot-list" id="spots"></div></div><div class="map fade"><svg viewBox="0 0 800 430"><path d="M95 85 C220 40 302 135 385 138 C492 142 512 258 610 252 C696 248 708 342 592 365 C468 389 407 319 300 338 C198 356 120 276 180 214 C238 154 130 148 95 85Z" fill="none" stroke="rgba(83,106,80,.18)" stroke-width="34" stroke-linecap="round"/><path d="M95 85 C220 40 302 135 385 138 C492 142 512 258 610 252 C696 248 708 342 592 365 C468 389 407 319 300 338 C198 356 120 276 180 214 C238 154 130 148 95 85Z" fill="none" stroke="#536A50" stroke-width="4" stroke-dasharray="10 12" stroke-linecap="round"/></svg><div id="pins"></div><div class="popup" id="popup"></div></div></div></section>
     <section id="routes"><div class="wrap"><div class="section-head fade"><div><div class="eyebrow">Flowerwalk Routes</div><h2>路线推荐</h2></div><p>横向路线卡片适合移动端滑动展示，把赏花变成可以执行的城市漫游计划。</p></div><div class="route-scroll" id="routesList"></div></div></section>
     <section class="soft" id="calendar"><div class="wrap"><div class="section-head fade"><div><div class="eyebrow">Bloom Calendar</div><h2>花期日历</h2></div><p>点击月份查看推荐地点和花卉介绍，把季节变化转译成清晰的城市行动。</p></div><div class="tabs" id="months"></div><div class="calendar-detail" id="monthDetail"></div></div></section>
-    <section><div class="wrap"><div class="section-head fade"><div><div class="eyebrow">Aesthetic Education</div><h2>从看花到学花</h2></div><p>美育活动把城市花卉变成开放课堂，让观察、创作与传播构成完整参与链路。</p></div><div class="cards edu" id="edu"></div></div></section>
+    <section>
+  <div class="wrap">
+    <div class="section-head fade">
+      <div><div class="eyebrow">Aesthetic Education</div><h2>从看花到学花</h2></div>
+      <p>美育活动把城市花卉变成开放课堂，让观察、创作与传播构成完整参与链路。</p>
+    </div>
+    <div class="cards edu" id="edu">
+      <a href="detail_1.html" class="card fade">
+        <div class="card-img" style="background-image: url('your-image-url.jpg');"></div>
+        <h3>感知花</h3>
+        <p>训练感官和观察力，从花色、气味、枝叶和生境开始认识植物。</p>
+      </a>
+      </div>
+  </div>
+</section>
     <section class="soft" id="ai"><div class="wrap ai-box"><div class="fade"><div class="eyebrow">AI Flower Guide</div><h2>AI 花卉导览</h2><p class="muted">输入“周末想看花”“樱花拍照”“月季识别”等关键词，模拟生成导览建议。</p></div><div class="assistant fade"><div class="ask"><input id="query" value="我周末想看花"><button id="ask">➜</button></div><div id="answer"></div></div></div></section>
     <section id="collection"><div class="wrap"><div class="section-head fade"><div><div class="eyebrow">Flowerwalk Collection</div><h2>把花带回家</h2></div><p>原创 Flower Walk IP，以柔软、治愈、拟人化的毛绒玩偶语言呈现。</p></div><div class="products" id="products"></div></div></section>
     <section class="vision"><div class="wrap fade"><div class="eyebrow">Brand Vision</div><h2>让城市成为一座花园<br>让花园成为一所学校</h2><p class="lead">Flower Walk 希望通过花卉、漫游与美育，建立人与自然、人与城市之间新的连接方式。</p></div></section>
@@ -37,7 +90,20 @@
     const spots=[["玉渊潭公园","樱花","3月下旬-4月中旬","花卉写生 · 摄影漫步","北京春季最具代表性的樱花观赏地之一，适合清晨或傍晚慢行。",14,22],["元大都海棠花溪","海棠","4月","自然观察 · 花色采集","海棠花带沿城市遗址展开，适合观察花色、枝形与社区绿化关系。",50,34],["国家植物园","月季","5月-6月","植物识别 · 花艺体验","植物资源丰富，可用于花卉识别、自然教育和花艺体验课程。",24,66],["奥林匹克森林公园","四季花卉","全年","自然漫步 · 摄影","大尺度城市绿地，适合长距离漫游、摄影和季相观察。",68,62],["天坛公园","古树花卉景观","春夏秋","古树观察 · 建筑速写","古建、古树和花卉景观共同构成具有北京气质的自然课堂。",78,42]];
     const routes=[["樱花漫游线","玉渊潭 → 北京动物园 → 紫竹院","半日","水岸、花影、春日轻风","#F3D7D7"],["海棠漫游线","元大都海棠花溪 → 北土城遗址公园","2小时","遗址、花溪、社区漫步","#F7E0E0"],["月季漫游线","国家植物园 → 北京国际鲜花港","一日","识花、花艺、园艺灵感","#E7B7B9"],["四季花路","春 樱花 · 夏 荷花 · 秋 菊花 · 冬 梅花","全年","跟随花期更新城市记忆","#9FB59A"]];
     const months=[["3月","樱花","玉渊潭公园、北京植物园","春天的第一条花路，适合摄影漫步和花瓣观察。"],["4月","海棠","元大都海棠花溪、陶然亭公园","花色柔和、枝形舒展，适合自然手账和花色采集。"],["5月","月季","国家植物园、北京国际鲜花港","城市园艺中最具亲和力的花卉之一，适合植物识别。"],["6月","荷花","北海公园、圆明园","水岸景观进入夏季状态，适合观察叶面、花形与倒影。"],["9月","菊花","北海公园、北京植物园","秋季花卉的色彩课堂，可结合传统文化与造型观察。"],["12月","梅花","明城墙遗址公园、香山公园","冬日花事更克制，适合寻找城市里的安静自然片段。"]];
-    const edu=[["感知花","闻香 · 观察 · 记录","训练感官和观察力，从花色、气味、枝叶和生境开始认识植物。","◉"],["创作花","押花书签 · 花瓣拼贴 · 植物拓印 · 自然手账","把赏花转化为材料实验和视觉表达，形成可收藏的学习成果。","✦"],["传播花","摄影挑战 · Flower Walk 打卡 · 城市花卉护照","通过线上展览和线下打卡，让花卉知识在社群中流动。","☉"]];
+    // 修改渲染 edu 的逻辑部分
+const edu = [
+    ["感知花", "训练感官和观察力，从花色、气味、枝叶和生境开始认识植物。", "img1.jpg", "detail_1.html"],
+    ["创作花", "把赏花转化为材料实验和视觉表达，形成可收藏的学习成果。", "img2.jpg", "detail_2.html"],
+    ["传播花", "通过线上展览和线下打卡，让花卉知识在社群中流动。", "img3.jpg", "detail_3.html"]
+];
+
+$("#edu").innerHTML = edu.map(item => `
+    <a href="${item[3]}" class="card fade">
+        <div class="card-img" style="background-color: #ddd;"></div>
+        <h3>${item[0]}</h3>
+        <p>${item[1]}</p>
+    </a>
+`).join("");
     const ai=[["周末,海棠,4月,附近,亲子","元大都海棠花溪","盛花期","海棠漫游线","自然观察 · 花瓣拓印","步行尺度舒适，花带连续，适合周末轻量漫游。"],["樱花,拍照,摄影,春天","玉渊潭公园","观赏期","樱花漫游线","摄影漫步 · 花卉写生","水岸空间与樱花层次丰富，适合构图和光影观察。"],["月季,识别,花艺,学习","国家植物园","即将进入盛花期","月季漫游线","植物识别 · 花艺体验","植物资源集中，适合系统认识花卉品种。"]];
     const products=[["Sakura Puff","樱花团子","圆滚滚的樱花精灵，头顶一枚柔软花瓣，像春天落进掌心。","#F8D5DA","#D6A9AF"],["Haton","海棠小漫","浅粉白渐变的海棠小伙伴，用叶子手脚陪你走过城市花溪。","#F7E0E0","#9FB59A"],["Rosie","月季绒球","奶油粉色月季花球，可作为挂件，也可以成为花期护照的小守护。","#F2C8C6","#C9959B"]];
     function card([t,d,i]){return `<article class="card fade"><div class="icon">${i}</div><h3>${t}</h3><p>${d}</p></article>`}
