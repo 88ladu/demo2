@@ -352,15 +352,17 @@
       gap:24px;
     }
     .season-art{
-      border-radius:8px;
-      border:1px solid var(--line);
-      min-height:300px;
-      background:
-        radial-gradient(circle at 50% 42%, rgba(239,143,182,.92) 0 22%, transparent 23%),
-        radial-gradient(circle at 36% 50%, rgba(248,200,216,.9) 0 23%, transparent 24%),
-        radial-gradient(circle at 63% 57%, rgba(219,65,112,.88) 0 20%, transparent 21%),
-        repeating-linear-gradient(30deg, rgba(82,107,61,.18) 0 4px, transparent 4px 10px),
-        #eadc45;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      min-height: 300px;
+      overflow: hidden;   /* 确保图片不会溢出圆角 */
+      background: #f4ead9;/* 图片加载前的底色 */
+    }
+    .season-art img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;  /* 让图片自动撑满容器并保持比例 */
+      display: block;
     }
     .activity-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     .activity{
