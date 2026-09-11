@@ -54,13 +54,14 @@
     p{line-height:1.8;color:var(--muted)}
     button{font:inherit;color:inherit;cursor:pointer}
     .wrap{width:min(1160px,calc(100% - 32px));margin:auto}
-    .eyebrow{
-      font-size:12px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      font-weight:800;
-      color:var(--green);
-    }
+    .eyebrow {
+  font-size: 12px;           /* 减小字号 */
+  letter-spacing: 1.5px;     /* 保持精致的字间距 */
+  color: #4a5d4e;            /* 呼应主题的青绿色 */
+  margin-bottom: 8px;
+  font-family: inherit;      /* 确保能完美显示中文 */
+  text-transform: none;      /* 取消原先可能有的全大写英文限制 */
+}
     .seal{
       display:inline-grid;
       place-items:center;
@@ -530,15 +531,10 @@
       </div>
     </section>
 
-    <section id="logic" class="soft">
-      <div class="wrap">
-        <div class="section-head fade">
-          <div>
-            <div class="eyebrow">SPATIAL STRATEGY</div>
-            <h2>从会场窗口<br>走到市井日常</h2>
-          </div>
-          <p>页面将项目重新梳理为“一座总枢纽、两套路线、四类空间、三幕活动”。所有节点使用现有公共空间，只加入轻量导视、可回收装置、流动展架和小程序入口。</p>
-        </div>
+    <section class="slide">
+    <div class="eyebrow">中国艺术管理教育学会第二十一届年会 · 空间策略</div>
+    <h2>会场窗口 · 市井日常</h2>
+    <p>将项目重新梳理为“一座总枢纽、两套路线、四类空间、三幕活动”。所有节点使用现有公共空间，只加入轻量导视、可回收装置、流动展架和小程序入口。</p>
 
         <div class="logic">
           <article class="logic-panel fade">
@@ -556,17 +552,12 @@
             <article class="card node fade"><div class="num">04 / 社区与古镇点</div><b>小雅公园 + 洛带古镇</b><p>面向居民与古镇本地生活，让美育不只发生在景区。</p></article>
           </div>
         </div>
-      </div>
     </section>
 
-    <section id="map">
-      <div class="wrap">
-        <div class="section-head fade">
-          <div>
-            <div class="eyebrow">ROUTE SYSTEM</div>
-            <h2>A 线都会市井<br>B 线天府古镇</h2>
-          </div>
-          <p>大赛示范路线适合年会嘉宾、学生团队短时间参访；市民常态化路线支持分段打卡；洛带古镇支线回应“空间美学与城乡美育共建”。</p>
+    <section class="slide">
+    <div class="eyebrow">中国艺术管理教育学会第二十一届年会 · 路线系统</div>
+    <h2>双线漫游指南</h2>
+    <p>大赛示范路线适合年会嘉宾、学生团队短时间参访；市民常态化路线支持分段打卡；洛带古镇支线回应“空间美学与城乡美育共建”。</p>
         </div>
 
         <div class="map-layout">
@@ -614,17 +605,12 @@
             </div>
           </article>
         </div>
-      </div>
     </section>
 
-    <section id="season" class="soft">
-      <div class="wrap">
-        <div class="section-head fade">
-          <div>
-            <div class="eyebrow">THREE ACTS</div>
-            <h2>严格跟随<br>木芙蓉物候</h2>
-          </div>
-          <p>木芙蓉不只在盛花期被观看。页面按 9-10 月盛放、10-11 月凋零、12-次年 2 月枯寂组织活动，避免概念和时间错位。</p>
+    <section class="slide">
+    <div class="eyebrow">中国艺术管理教育学会第二十一届年会 · 物候美育</div>
+    <h2>芙蓉三幕时序</h2>
+    <p>木芙蓉不只在盛花期被观看。页面按 9-10 月盛放、10-11 月凋零、12-次年 2 月枯寂组织活动，避免概念和时间错位。</p>
         </div>
 
         <div class="season-board">
@@ -634,17 +620,12 @@
             <div id="seasonDetail"></div>
           </div>
         </div>
-      </div>
     </section>
 
-    <section id="posters">
-      <div class="wrap">
-        <div class="section-head fade">
-          <div>
-            <div class="eyebrow">ACTIVITY POSTER SYSTEM</div>
-            <h2>蓉花三幕<br>活动小帖</h2>
-          </div>
-          <p>把盛放、落蓉与冬藏分别转化为可张贴、可替换、可延展的活动小帖。后续有实拍图时，可直接替换这些占位图。</p>
+    <section class="slide">
+    <div class="eyebrow">中国艺术管理教育学会第二十一届年会 · 视觉延展</div>
+    <h2>三幕活动小帖</h2>
+    <p>把盛放、落蓉与冬藏分别转化为可张贴、可替换、可延展的活动小帖。后续有实拍图时，可直接替换这些占位图。</p>
         </div>
 
         <div class="poster-grid">
@@ -681,17 +662,12 @@
             </div>
           </article>
         </div>
-      </div>
     </section>
 
-    <section class="soft">
-      <div class="wrap">
-        <div class="section-head fade">
-          <div>
-            <div class="eyebrow">MINI PROGRAM</div>
-            <h2>小程序<br>把漫游变成长期运营</h2>
-          </div>
-          <p>数字端不做复杂炫技，而是服务路线导航、活动预约、蓉花时序档案和年会专题板块，让短期示范可以沉淀为常态化项目。</p>
+    <section class="slide">
+    <div class="eyebrow">中国艺术管理教育学会第二十一届年会 · 数字长效</div>
+    <h2>数字长效运营</h2>
+    <p>数字端不做复杂炫技，而是服务路线导航、活动预约、蓉花时序档案和年会专题板块，让短期示范可以沉淀为常态化项目。</p>
         </div>
         <div class="mini-program">
   <article class="phone fade"><div class="screen"></div><h3>漫游地图</h3><p>A 线、B 线、年会短路线、市民完整线可切换。</p></article>
@@ -711,25 +687,19 @@
   </a>
 
   <article class="phone fade"><div class="screen"></div><h3>年会专题</h3><p>展示 2026 年会现场微展、种子交换和示范路线影像。</p></article>
-</div>
-      </div>
+       </div>
     </section>
 
-    <section id="conference" class="conference">
-      <div class="wrap">
-        <div class="section-head fade">
-          <div>
-            <div class="eyebrow">ANNUAL CONFERENCE DEMO KIT</div>
-            <h2>2026.12.5<br>年会示范活动包</h2>
-          </div>
-          <p>年会时间落在第三幕“寒蓉冬藏”。因此现场示范不再强行做赏花，而是把枯枝、种子、年度共创作品和数字地图转化为可触摸、可讲述、可带走的展示。</p>
+    <section class="slide">
+    <div class="eyebrow">中国艺术管理教育学会第二十一届年会 · 现场示范</div>
+    <h2>年会示范包</h2>
+    <p>年会时间落在第三幕“寒蓉冬藏”。因此现场示范不再强行做赏花，而是把枯枝、种子、年度共创作品和数字地图转化为可触摸、可讲述、可带走的展示。</p>
         </div>
         <div class="cards">
           <article class="card fade"><div class="num">01 / 微型成果展</div><h3>成都城市音乐厅回廊</h3><p>枯枝样品、手作实物、项目展板、市民影像，全部使用可回收材料并在会后复原场地。</p></article>
           <article class="card fade"><div class="num">02 / 蓉种冬藏体验站</div><h3>种子 + 手册 + 交换</h3><p>参会嘉宾领取芙蓉种子和项目手册，把一次会议体验延伸到下一季花事。</p></article>
           <article class="card fade"><div class="num">03 / 三条体验选择</div><h3>短线、长线、古镇线</h3><p>1.5 小时音乐厅到少城；半天城市完整线；一日洛带古镇调研支线。</p></article>
         </div>
-      </div>
     </section>
   </main>
 
