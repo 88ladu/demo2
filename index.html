@@ -741,9 +741,10 @@
           <small>${s[1]} · ${s[2]}</small>
         </button>
       `).join("");
-      $("#pins").innerHTML = spots.map((s,i)=>`
-        <button class="pin ${s[7] ? "town" : ""}" data-i="${i}" style="left:${s[5]}%;top:${s[6]}%">${i+1}</button>
-      `).join("");
+      // 修改后
+$("#pins").innerHTML = spots.map((s,i)=>`
+  <a href="map.html" class="pin ${s[7] ? "town" : ""}" style="left:${s[5]}%;top:${s[6]}%">${i+1}</a>
+`).join("");
       updateSpot(active);
       $$("#spots button, #pins button").forEach(btn => btn.addEventListener("click", () => updateSpot(Number(btn.dataset.i))));
     }
