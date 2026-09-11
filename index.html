@@ -3,732 +3,840 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flowerwalk in Beijing</title>
+  <title>蓉花时序・市井美育漫游计划</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f5efe3'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34' fill='%23a24336'%3E蓉%3C/text%3E%3C/svg%3E">
   <style>
-   :root{
-  --petal:#F7F4EE;
-  --sage:#879B78;
-  --rose:#E9B8B5;
-  --begonia:#F3D6D0;
-  --ink:#292824;
-  --moss:#52644B;
-  --vermillion:#A94B43;
-  --tea:#B79B72;
-  --bamboo:#DCE3D3;
-  --line:rgba(41,40,36,.12);
-  --paper:rgba(255,255,255,.68);
-  --shadow:0 28px 90px rgba(61,53,43,.12)
-}
+    :root{
+      --paper:#f5efe3;
+      --paper-deep:#ebe0cf;
+      --ink:#2b2720;
+      --muted:#756b5e;
+      --green:#526b3d;
+      --green-soft:#dce3c9;
+      --pink:#ef8fb6;
+      --pink-soft:#f8c8d8;
+      --yellow:#eadc45;
+      --red:#a24336;
+      --tea:#b68255;
+      --line:rgba(43,39,32,.16);
+      --white:rgba(255,252,244,.76);
+      --shadow:0 24px 60px rgba(72,52,28,.13);
+    }
 
-.dark{
-  --petal:#181A17;
-  --ink:#F5F0E8;
-  --line:rgba(255,255,255,.12);
-  --paper:rgba(255,255,255,.08);
-  --shadow:0 30px 90px rgba(0,0,0,.28)
-}
-  
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--petal);color:var(--ink);font-family:"Noto Sans SC","Inter","PingFang SC",system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}.wrap{width:min(1180px,calc(100% - 28px));margin:auto}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.22em;color:var(--moss);font-weight:700}.dark .eyebrow{color:var(--sage)}h1,h2,h3,p{margin-top:0}a{color:inherit;text-decoration:none}
-    header{position:fixed;inset:0 0 auto;z-index:20;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--petal) 82%,transparent);backdrop-filter:blur(18px)}nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px;font-weight:700}.mark{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--petal)}.links{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}.links a{padding:9px 13px;border-radius:999px;font-size:14px;color:color-mix(in srgb,var(--ink) 72%,transparent)}.links a:hover{background:rgba(255,255,255,.75);color:var(--ink)}.dark .links a:hover{background:rgba(255,255,255,.12)}.theme{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--ink)}
-  .hero{
-  min-height:100vh;
-  position:relative;
-  overflow:hidden;
-  padding-top:64px;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(239,143,182,.18), transparent 28rem),
+        radial-gradient(circle at 90% 8%, rgba(82,107,61,.14), transparent 26rem),
+        linear-gradient(90deg, rgba(43,39,32,.035) 1px, transparent 1px),
+        linear-gradient(rgba(43,39,32,.035) 1px, transparent 1px),
+        var(--paper);
+      background-size:auto,auto,38px 38px,38px 38px,auto;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:20;
+      opacity:.32;
+      background-image:
+        linear-gradient(100deg, rgba(255,255,255,.16), transparent 24%),
+        repeating-linear-gradient(0deg, rgba(43,39,32,.025), rgba(43,39,32,.025) 1px, transparent 1px, transparent 5px);
+      mix-blend-mode:multiply;
+    }
+    a{color:inherit;text-decoration:none}
+    h1,h2,h3,p{margin-top:0}
+    p{line-height:1.8;color:var(--muted)}
+    button{font:inherit;color:inherit;cursor:pointer}
+    .wrap{width:min(1160px,calc(100% - 32px));margin:auto}
+    .eyebrow{
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:800;
+      color:var(--green);
+    }
+    .seal{
+      display:inline-grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      border:2px solid var(--red);
+      color:var(--red);
+      font-weight:800;
+      transform:rotate(-5deg);
+      background:rgba(255,252,244,.64);
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      border-bottom:1px solid var(--line);
+      background:rgba(245,239,227,.84);
+      backdrop-filter:blur(16px);
+    }
+    nav{
+      height:66px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand small{display:block;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.12em}
+    .links{display:flex;gap:6px}
+    .links a{
+      padding:9px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .links a:hover{background:var(--white);color:var(--ink)}
 
-  background:
-    radial-gradient(
-      circle at 24% 18%,
-      rgba(233,184,181,.48),
-      transparent 24rem
-    ),
-    radial-gradient(
-      circle at 76% 28%,
-      rgba(135,155,120,.32),
-      transparent 27rem
-    ),
-    radial-gradient(
-      circle at 60% 80%,
-      rgba(183,155,114,.18),
-      transparent 24rem
-    ),
-    linear-gradient(
-      135deg,
-      #F7F4EE,
-      #F5EAE4 45%,
-      #E9EFE4
-    );
-}.dark .hero{background:radial-gradient(circle at 28% 18%,rgba(94,61,65,.55),transparent 24rem),radial-gradient(circle at 70% 30%,rgba(74,96,71,.45),transparent 26rem),linear-gradient(135deg,#171917,#221d1c 48%,#182119)}.hero-grid{min-height:calc(100vh - 64px);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:48px;padding:70px 0 44px}.hero h1{font-size:clamp(54px,9vw,132px);line-height:.88;letter-spacing:0;margin:18px 0 28px}.lead{max-width:610px;font-size:22px;line-height:1.65;color:color-mix(in srgb,var(--ink) 68%,transparent)}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}.btn{min-height:48px;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:0 22px;border:1px solid var(--line);background:var(--paper);transition:.25s}.btn.primary{background:var(--ink);color:var(--petal);border-color:var(--ink)}.btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(83,106,80,.16)}
-    .visual{position:relative;min-height:520px;border:1px solid rgba(255,255,255,.7);border-radius:8px;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.38),rgba(255,255,255,.06)),radial-gradient(circle at 62% 24%,rgba(247,224,224,.95),transparent 11rem),radial-gradient(circle at 32% 60%,rgba(159,181,154,.78),transparent 14rem);box-shadow:var(--shadow)}.visual:before{content:"";position:absolute;inset:auto 0 0;height:48%;background:linear-gradient(to top,rgba(83,106,80,.72),rgba(159,181,154,.42),transparent)}.bloom{position:absolute;border-radius:50%;background:var(--rose);opacity:.86}.feature{position:absolute;left:28px;right:28px;bottom:28px;border:1px solid rgba(255,255,255,.5);border-radius:8px;background:rgba(255,255,255,.56);backdrop-filter:blur(16px);padding:24px}.dark .feature{background:rgba(23,25,23,.62);border-color:rgba(255,255,255,.12)}.petal{position:absolute;top:-12vh;width:10px;height:16px;border-radius:70% 30% 70% 30%;background:rgba(243,215,215,.86);animation:fall linear infinite}@keyframes fall{0%{transform:translate3d(0,-12vh,0) rotate(0);opacity:0}8%{opacity:.75}100%{transform:translate3d(var(--drift),112vh,0) rotate(360deg);opacity:0}}
-    section{padding:92px 0}.soft{background:#F4F2ED}.dark .soft{background:#1B1E1B}.section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:36px}.section-head h2{font-size:clamp(34px,5vw,58px);line-height:1.05;margin:12px 0 0}.section-head p{max-width:580px;line-height:1.8;color:color-mix(in srgb,var(--ink) 68%,transparent)}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:24px;box-shadow:0 10px 24px rgba(46,46,46,.04);transition:.25s}.card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(83,106,80,.16)}.icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--rose);margin-bottom:34px}.card p,.muted{line-height:1.75;color:color-mix(in srgb,var(--ink) 64%,transparent)}
-    .map-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:28px}.spot-list{display:grid;gap:12px}.spot{display:flex;gap:12px;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--paper);transition:.25s}.spot.active,.spot:hover{background:var(--moss);color:white}.spot span{font-size:14px;opacity:.72}.map{position:relative;min-height:560px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:linear-gradient(90deg,rgba(83,106,80,.08) 1px,transparent 1px),linear-gradient(rgba(83,106,80,.08) 1px,transparent 1px),linear-gradient(135deg,#fbfaf5,#e7eee4);background-size:56px 56px,56px 56px,auto}.map svg{position:absolute;inset:46px;width:calc(100% - 92px);height:calc(100% - 92px)}.pin{position:absolute;width:42px;height:42px;border:2px solid white;border-radius:50%;background:var(--moss);color:white;display:grid;place-items:center;box-shadow:0 10px 26px rgba(83,106,80,.25);animation:pulse 1.8s infinite}.pin:hover{background:#a55d66}.popup{position:absolute;right:24px;bottom:24px;width:min(320px,calc(100% - 48px));padding:20px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);box-shadow:var(--shadow);color:#2E2E2E}@keyframes pulse{50%{transform:scale(1.08)}}
-    .route-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}.route{min-width:420px;scroll-snap-align:start;overflow:hidden}.bar{height:8px}.route .big{font-size:30px;margin:34px 0 16px}.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.tab{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:18px;text-align:left;color:var(--ink)}.tab.active{background:var(--moss);color:white}.calendar-detail{margin-top:14px;border-radius:8px;background:var(--paper);border:1px solid var(--line);padding:24px}.edu{grid-template-columns:repeat(3,1fr)}.ai-box{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center}.assistant{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:20px;box-shadow:var(--shadow)}.ask{display:flex;gap:8px;background:color-mix(in srgb,var(--petal) 88%,white);border-radius:8px;padding:14px}.ask input{flex:1;min-height:48px;border:1px solid var(--line);border-radius:999px;background:white;padding:0 18px}.dark .ask input{background:rgba(255,255,255,.1);color:var(--ink)}.ask button{width:48px;border:0;border-radius:50%;background:var(--ink);color:var(--petal)}.result{display:flex;justify-content:space-between;gap:16px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.38);padding:15px;margin-top:10px}.result span{opacity:.55}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.product{overflow:hidden;padding:0}.product-art{height:270px;display:grid;place-items:center;position:relative}.tag{position:absolute;left:20px;top:20px;background:rgba(255,255,255,.7);padding:8px 12px;border-radius:999px;font-size:12px}.plush{width:176px;height:176px;border-radius:50%;position:relative;box-shadow:inset -18px -22px 40px rgba(0,0,0,.08),0 28px 60px rgba(46,46,46,.2);transition:.4s}.product:hover .plush{transform:scale(1.06)}.eye{position:absolute;top:76px;width:12px;height:12px;border-radius:50%;background:#2e2e2e}.eye.l{left:58px}.eye.r{right:58px}.mouth{position:absolute;left:74px;top:100px;width:30px;height:16px;border-bottom:2px solid rgba(46,46,46,.65);border-radius:0 0 999px 999px}.save{float:right;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--petal);color:var(--ink)}.save.on{background:var(--rose)}.vision{background:var(--ink);color:var(--petal);position:relative;overflow:hidden}.vision h2{font-size:clamp(40px,7vw,86px);line-height:1.02}.fade{opacity:0;transform:translateY(28px);transition:.75s cubic-bezier(.22,1,.36,1)}.fade.show{opacity:1;transform:none}footer{border-top:1px solid var(--line);padding:34px 0;color:color-mix(in srgb,var(--ink) 58%,transparent)}
-    @media(max-width:900px){.links{display:none}.hero-grid,.map-layout,.ai-box{grid-template-columns:1fr}.cards,.edu,.products{grid-template-columns:1fr 1fr}.visual{min-height:430px}.tabs{grid-template-columns:repeat(3,1fr)}}@media(max-width:620px){.cards,.edu,.products,.tabs{grid-template-columns:1fr}.hero h1{font-size:58px}.route{min-width:86%}.section-head{display:block}.map{min-height:420px}}
-    /* 优化美育卡片样式 */
-.edu {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
+    .hero{
+      min-height:calc(100vh - 66px);
+      display:grid;
+      align-items:center;
+      overflow:hidden;
+      position:relative;
+      padding:58px 0 42px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:46px;
+      align-items:center;
+    }
+    .hero-title{
+      letter-spacing:0;
+      margin:16px 0 22px;
+      font-family:"STKaiti","KaiTi","Songti SC",serif;
+      color:var(--red);
+    }
+    .hero-title .main-title{
+      display:block;
+      font-size:clamp(62px,9vw,122px);
+      line-height:.9;
+      font-weight:800;
+    }
+    .hero-title .plan-title{
+      display:block;
+      width:max-content;
+      max-width:100%;
+      margin-top:12px;
+      padding:8px 14px 7px;
+      border-block:2px solid rgba(162,67,54,.72);
+      color:#2b2720;
+      font-size:clamp(26px,3.4vw,48px);
+      line-height:1;
+      font-weight:900;
+      letter-spacing:.06em;
+      background:rgba(255,252,244,.34);
+    }
+    .hero-title .city-note{
+      display:block;
+      margin-top:12px;
+      color:var(--green);
+      font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.28em;
+    }
+    .hero .lead{
+      max-width:560px;
+      font-size:20px;
+      color:#4d4337;
+    }
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .btn{
+      min-height:46px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:0 18px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:var(--white);
+      box-shadow:0 8px 18px rgba(72,52,28,.06);
+    }
+    .btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+    .btn:hover{transform:translateY(-2px)}
 
-/* 优化美育卡片样式 */
-.edu .card {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--ink);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* 整体过渡效果 */
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 12px; /* 圆角更柔和 */
-}
+    .hero-poster{
+      min-height:610px;
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:var(--shadow);
+      display:grid;
+      place-items:center;
+      padding:22px;
+    }
+    .hero-poster img{
+      width:100%;
+      height:100%;
+      max-height:610px;
+      object-fit:contain;
+      display:block;
+      filter:saturate(1.04) contrast(1.02);
+    }
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,252,244,.62);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:13px;
+      color:#54483a;
+    }
 
-/* 悬停时：卡片上浮并加深阴影 */
-.edu .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
+    section{padding:82px 0}
+    .soft{background:rgba(255,252,244,.42);border-block:1px solid var(--line)}
+    .section-head{
+      display:grid;
+      grid-template-columns:minmax(260px,.8fr) minmax(280px,1fr);
+      gap:34px;
+      align-items:end;
+      margin-bottom:34px;
+    }
+    .section-head h2{
+      font-size:clamp(32px,5vw,60px);
+      line-height:1.08;
+      margin:10px 0 0;
+      font-family:"STKaiti","KaiTi","Songti SC",serif;
+    }
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:rgba(255,252,244,.68);
+      padding:24px;
+      box-shadow:0 12px 26px rgba(72,52,28,.05);
+    }
+    .card h3{font-size:22px;margin-bottom:10px}
+    .num{font-size:13px;letter-spacing:.16em;color:var(--red);font-weight:800;margin-bottom:42px}
+    .icon-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .mini-icon{
+      width:54px;
+      height:54px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      background:var(--green-soft);
+      border:1px solid var(--line);
+      font-size:26px;
+    }
 
-.card-img {
-  width: 100%;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  /* 图片自带缩放过渡 */
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
+    .logic{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:16px;
+    }
+    .logic-panel{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#35502e;
+      color:#fff9e8;
+      padding:28px;
+      min-height:360px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      overflow:hidden;
+      position:relative;
+    }
+    .logic-panel:after{
+      content:"蓉";
+      position:absolute;
+      right:-18px;
+      bottom:-46px;
+      font-size:220px;
+      line-height:1;
+      color:rgba(255,249,232,.08);
+      font-family:"STKaiti","KaiTi",serif;
+    }
+    .logic-panel p{color:rgba(255,249,232,.78)}
+    .node-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .node{min-height:172px}
+    .node b{display:block;margin-bottom:8px}
 
-/* 悬停时：图片缓慢放大（视觉焦点） */
-.edu .card:hover .card-img {
-  transform: scale(1.1);
-}
+    .map-layout{display:grid;grid-template-columns:.74fr 1.26fr;gap:20px}
+    .spot-list{display:grid;gap:10px}
+    .spot{
+      width:100%;
+      text-align:left;
+      display:grid;
+      gap:4px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:rgba(255,252,244,.7);
+      padding:16px;
+    }
+    .spot small{color:var(--muted)}
+    .spot.active{background:var(--green);color:#fff9e8}
+    .spot.active small{color:rgba(255,249,232,.72)}
+    .map{
+      min-height:570px;
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 26% 30%, rgba(239,143,182,.18), transparent 14rem),
+        radial-gradient(circle at 72% 64%, rgba(82,107,61,.16), transparent 15rem),
+        linear-gradient(135deg,#fbf5e8,#eadfcc);
+    }
+    .map svg{position:absolute;inset:42px;width:calc(100% - 84px);height:calc(100% - 84px)}
+    .pin{
+      position:absolute;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:2px solid #fff8e8;
+      background:var(--red);
+      color:#fff8e8;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      box-shadow:0 10px 24px rgba(80,50,30,.2);
+    }
+    .pin.town{background:var(--green)}
+    .popup{
+      position:absolute;
+      left:24px;
+      right:24px;
+      bottom:24px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:rgba(255,252,244,.84);
+      backdrop-filter:blur(12px);
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+    .route-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .route-card{padding:0;overflow:hidden}
+    .route-band{height:9px;background:var(--green)}
+    .route-body{padding:24px}
+    .route-body ol{padding-left:18px;line-height:1.8;color:var(--muted)}
+    .route-meta{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
 
-.edu .card h3 {
-  margin: 20px 20px 10px;
-  font-size: 20px;
-}
+    .season-board{
+      display:grid;
+      grid-template-columns:260px 1fr;
+      gap:18px;
+    }
+    .season-tabs{display:grid;gap:10px}
+    .season-tab{
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:rgba(255,252,244,.72);
+      padding:16px;
+      text-align:left;
+    }
+    .season-tab.active{background:#f0a3bf}
+    .season-detail{
+      min-height:430px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff9ed;
+      padding:26px;
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:24px;
+    }
+    .season-art{
+      border-radius:8px;
+      border:1px solid var(--line);
+      min-height:300px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(239,143,182,.92) 0 22%, transparent 23%),
+        radial-gradient(circle at 36% 50%, rgba(248,200,216,.9) 0 23%, transparent 24%),
+        radial-gradient(circle at 63% 57%, rgba(219,65,112,.88) 0 20%, transparent 21%),
+        repeating-linear-gradient(30deg, rgba(82,107,61,.18) 0 4px, transparent 4px 10px),
+        #eadc45;
+    }
+    .activity-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .activity{
+      border:1px dashed rgba(43,39,32,.24);
+      border-radius:8px;
+      padding:14px;
+      background:rgba(245,239,227,.55);
+    }
+    .activity b{display:block;margin-bottom:5px}
 
-.edu .card p {
-  margin: 0 20px 24px;
-  font-size: 14px;
-  line-height: 1.6;
-  opacity: 0.8;
+    .poster-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .poster{
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+      position:relative;
+      background:#fff9ed;
+      padding:0;
+      box-shadow:0 16px 34px rgba(72,52,28,.08);
+    }
+    .poster img{
+      width:100%;
+      aspect-ratio:3/4;
+      object-fit:cover;
+      display:block;
+      transition:transform .45s ease;
+    }
+    .poster:hover img{transform:scale(1.035)}
+    .poster-caption{
+      min-height:116px;
+      padding:16px 18px 18px;
+      background:rgba(255,252,244,.88);
+      border-top:1px solid var(--line);
+    }
+    .poster-caption h3{
+      margin:6px 0 6px;
+      font-size:20px;
+      line-height:1.25;
+      font-family:"STKaiti","KaiTi",serif;
+    }
+    .poster-caption p{
+      margin:0;
+      font-size:13px;
+      line-height:1.55;
+    }
 
-  .route-legend{
-  display:flex;
-  flex-wrap:wrap;
-  gap:18px;
-  margin:24px 0;
-  font-size:13px;
-  color:var(--ink);
-}
+    .mini-program{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+    .phone{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:#fff9ed;
+      padding:16px;
+      min-height:300px;
+      box-shadow:var(--shadow);
+    }
+    .screen{
+      height:190px;
+      border-radius:14px;
+      background:
+        linear-gradient(90deg, rgba(82,107,61,.15) 1px, transparent 1px),
+        linear-gradient(rgba(82,107,61,.15) 1px, transparent 1px),
+        #f4ead9;
+      background-size:24px 24px;
+      margin-bottom:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .screen:after{
+      content:"";
+      position:absolute;
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      background:var(--pink);
+      left:50%;
+      top:46%;
+      transform:translate(-50%,-50%);
+      opacity:.8;
+    }
 
-.route-legend span{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+    .conference{
+      background:#2f4728;
+      color:#fff9ed;
+      position:relative;
+      overflow:hidden;
+    }
+    .conference p,.conference .eyebrow{color:rgba(255,249,232,.78)}
+    .conference:after{
+      content:"2026.12.5";
+      position:absolute;
+      right:4vw;
+      top:28px;
+      font-size:clamp(48px,10vw,138px);
+      color:rgba(255,249,232,.07);
+      font-weight:900;
+    }
+    .conference .card{background:rgba(255,249,232,.08);border-color:rgba(255,249,232,.18)}
+    .conference .card p{color:rgba(255,249,232,.76)}
 
-.legend-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  display:inline-block;
-}
+    footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted)}
+    .fade{opacity:0;transform:translateY(18px);transition:.6s ease}
+    .fade.show{opacity:1;transform:none}
 
-.legend-dot.urban{
-  background:var(--moss);
-}
-
-.legend-dot.town{
-  background:var(--vermillion);
-}
-  .season-timeline{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--line);
-  border:1px solid var(--line);
-  margin-top:42px;
-}
-
-.season-item{
-  background:var(--paper);
-  padding:30px;
-  min-height:220px;
-}
-
-.season-number{
-  font-size:12px;
-  letter-spacing:.18em;
-  opacity:.5;
-  margin-bottom:50px;
-}
-
-.season-item h3{
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-.season-item p{
-  line-height:1.7;
-  opacity:.68;
-}
-
-@media(max-width:620px){
-  .season-timeline{
-    grid-template-columns:1fr;
-  }
-}
-}
+    @media(max-width:900px){
+      .links{display:none}
+      .hero-grid,.logic,.map-layout,.section-head,.season-board,.season-detail{grid-template-columns:1fr}
+      .cards,.route-cards,.poster-grid,.mini-program{grid-template-columns:repeat(2,1fr)}
+      .hero-poster{min-height:520px}
+    }
+    @media(max-width:620px){
+      .cards,.route-cards,.poster-grid,.mini-program,.node-grid,.activity-grid{grid-template-columns:1fr}
+      section{padding:58px 0}
+      .hero-title .main-title{font-size:58px}
+      .hero-title .plan-title{font-size:28px}
+      .map{min-height:470px}
+    }
   </style>
 </head>
 <body>
-  <header><nav class="wrap"><a class="brand" href="#home">
-  <span class="mark">蓉</span>
-  <span>蓉花时序</span>
-</a>
-
-<div class="links">
-  <a href="#map">漫游地图</a>
-  <a href="#routes">路线</a>
-  <a href="#calendar">三幕时序</a>
-  <a href="#ai">AI导览</a>
-  <a href="#collection">花物</a>
-  <a href="#conference">年会示范</a>
-</div><button class="theme" id="theme">◐</button></nav></header>
-  <main>
-  <section class="hero" id="home">
-  <div id="petals"></div>
-
-  <div class="wrap hero-grid">
-
-    <div class="fade">
-
-      <div class="eyebrow">
-        CHENGDU · HIBISCUS · URBAN WALK
+  <header>
+    <nav class="wrap">
+      <a class="brand" href="#top">
+        <span class="seal">蓉</span>
+        <span>蓉花时序<small>CHENGDU FLOWER WALK</small></span>
+      </a>
+      <div class="links">
+        <a href="#logic">空间逻辑</a>
+        <a href="#map">双线地图</a>
+        <a href="#season">三幕活动</a>
+        <a href="#posters">活动海报</a>
+        <a href="#conference">年会示范</a>
       </div>
+    </nav>
+  </header>
 
-      <h1>
-        蓉花<br>
-        时序
-      </h1>
-
-      <p class="lead">
-        从盛放到凋零，从一朵花到一座城。
-        沿着成都的公园、茶馆、老街与社区，
-        漫游木芙蓉的三幕四季。
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="#routes">
-          开始蓉花漫游 ↓
-        </a>
-
-        <a class="btn" href="#map">
-          查看成都路线 ⌖
-        </a>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="fade">
+          <div class="eyebrow">中国艺术管理教育学会第二十一届年会 · 成都</div>
+          <h1 class="hero-title">
+            <span class="main-title">蓉花时序</span>
+            <span class="plan-title">市井美育计划</span>
+            <span class="city-note">花重锦官城 · 慢游老成都</span>
+          </h1>
+          <p class="lead">以成都城市音乐厅为始发枢纽，沿人民公园、少城祠堂街、小雅公园延伸到洛带古镇，把木芙蓉的盛放、凋零、枯寂转化为一套小而美的城市美育行动。</p>
+          <div class="chips">
+            <span class="chip">不大拆大建</span>
+            <span class="chip">存量空间复用</span>
+            <span class="chip">市井民生优先</span>
+            <span class="chip">城乡美育共建</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="#map">查看漫游路线</a>
+            <a class="btn" href="#conference">年会示范活动</a>
+          </div>
+        </div>
+        <div class="hero-poster fade" aria-label="花重锦官城木芙蓉视觉图">
+          <img src="assets/hero-hibiscus-jinguan.png" alt="花重锦官城木芙蓉插画">
+        </div>
       </div>
+    </section>
 
-    </div>
-
-    <div class="visual fade" id="visual">
-
-      <div class="feature">
-
-        <div class="eyebrow">
-          RONGHUA SEASON
+    <section id="logic" class="soft">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div>
+            <div class="eyebrow">SPATIAL STRATEGY</div>
+            <h2>从会场窗口<br>走到市井日常</h2>
+          </div>
+          <p>页面将项目重新梳理为“一座总枢纽、两套路线、四类空间、三幕活动”。所有节点使用现有公共空间，只加入轻量导视、可回收装置、流动展架和小程序入口。</p>
         </div>
 
-        <h2>
-          蓉锦盛放
-        </h2>
-
-        <p class="muted">
-          9—10月 · 木芙蓉盛放
-          <br>
-          从城市音乐厅出发，
-          走进成都的公园、老街与社区。
-        </p>
-
+        <div class="logic">
+          <article class="logic-panel fade">
+            <div>
+              <div class="eyebrow">TOTAL HUB</div>
+              <h3>成都城市音乐厅</h3>
+              <p>年会专家、学生团队和公众聚集的城市枢纽。户外广场与公共回廊可承载项目概念展、种子交换站、成果微展和小程序现场演示。</p>
+            </div>
+            <span>会场 → 城市 → 社区 → 古镇</span>
+          </article>
+          <div class="node-grid">
+            <article class="card node fade"><div class="num">01 / 枢纽窗口点</div><b>成都城市音乐厅</b><p>项目总入口，承担年会展示、路线启程和数字导览入口。</p></article>
+            <article class="card node fade"><div class="num">02 / 经典公园点</div><b>人民公园</b><p>把芙蓉导赏与盖碗茶、市民休闲结合，形成最具成都日常感的赏花节点。</p></article>
+            <article class="card node fade"><div class="num">03 / 市井老街点</div><b>少城・祠堂街</b><p>橱窗、公告栏、茶馆和沿街墙面成为轻量展陈界面。</p></article>
+            <article class="card node fade"><div class="num">04 / 社区与古镇点</div><b>小雅公园 + 洛带古镇</b><p>面向居民与古镇本地生活，让美育不只发生在景区。</p></article>
+          </div>
+        </div>
       </div>
+    </section>
 
-    </div>
-
-  </div>
-</section>
-    <div class="season-timeline">
-
-  <div class="season-item">
-    <div class="season-number">01 / BLOOM</div>
-    <h3>蓉锦盛放</h3>
-    <p>
-      9—10月<br>
-      看花 · 漫游 · 导赏
-    </p>
-  </div>
-
-  <div class="season-item">
-    <div class="season-number">02 / FALL</div>
-    <h3>落蓉再生</h3>
-    <p>
-      10—11月<br>
-      拾落 · 手作 · 共创
-    </p>
-  </div>
-
-  <div class="season-item">
-    <div class="season-number">03 / WINTER</div>
-    <h3>寒蓉冬藏</h3>
-    <p>
-      12—次年2月<br>
-      枯枝 · 种子 · 回望
-    </p>
-  </div>
-
-</div>
-    <section><div class="wrap"><div class="section-head fade"><div><div class="eyebrow">WHAT IS RONGHUA WALK?</div>
-
-<h2>
-  一朵芙蓉<br>
-  漫游一座成都
-</h2>
-
-<p>
-  「蓉花时序」以木芙蓉的生命周期为时间线，
-  以成都的公园、老街、社区与古镇为城市节点，
-  将赏花、漫游、手作与社区美育连接起来。
-  <br><br>
-  我们不建造新的景观，
-  而是重新发现城市里已经存在的花与生活。
-</p>/div><div class="cards" id="intro"></div></div></section>
-    <section class="soft" id="map"><div class="wrap map-layout"><div class="fade"><div class="eyebrow">CHENGDU URBAN WALK</div>
-
-<h2>成都蓉花漫游地图</h2>
-
-<p class="muted">
-  一条都会市井主线，
-  一条天府古镇支线。
-  从城市音乐厅出发，走进成都日常。
-</p><div class="spot-list" id="spots"></div></div><div class="map fade"><svg viewBox="0 0 800 430"><path d="M95 85 C220 40 302 135 385 138 C492 142 512 258 610 252 C696 248 708 342 592 365 C468 389 407 319 300 338 C198 356 120 276 180 214 C238 154 130 148 95 85Z" fill="none" stroke="rgba(83,106,80,.18)" stroke-width="34" stroke-linecap="round"/><path d="M95 85 C220 40 302 135 385 138 C492 142 512 258 610 252 C696 248 708 342 592 365 C468 389 407 319 300 338 C198 356 120 276 180 214 C238 154 130 148 95 85Z" fill="none" stroke="#536A50" stroke-width="4" stroke-dasharray="10 12" stroke-linecap="round"/></svg><div id="pins"></div><div class="popup" id="popup"></div></div></div></section>
-    <section id="routes"><div class="wrap"><div class="section-head fade"><div><div class="eyebrow">RONGHUA WALK ROUTES</div>
-
-<h2>
-  两条路线<br>
-  漫游一座成都
-</h2>
-
-<p>
-  年会嘉宾从成都城市音乐厅出发，
-  用1.5小时体验“会场—城市”的蓉花时序；
-  市民则可以沿完整城区路线慢慢漫游，
-  也可以继续向洛带古镇延伸。
-</p></div><div class="route-scroll" id="routesList"></div></div></section>
-    <section class="soft" id="calendar"><div class="wrap"><div class="section-head fade"><div><<div class="eyebrow">RONGHUA PHENOLOGY</div>
-
-<h2>
-  一年三幕
-</h2>
-
-<p>
-  木芙蓉不是只有盛开时才值得观看。
-  我们把盛放、凋零与枯寂都作为城市美育的内容。
-</p></div><div class="tabs" id="months"></div><div class="calendar-detail" id="monthDetail"></div></div></section>
-    <section>
-  <div class="wrap">
-    <div class="section-head fade">
-      <div class="route-legend">
-
-  <span>
-    <i class="legend-dot urban"></i>
-    A线｜都会市井主线
-  </span>
-
-  <span>
-    <i class="legend-dot town"></i>
-    B线｜天府古镇支线
-  </span>
-
-<div class="section-head fade">
-
-  <div>
-    <div class="eyebrow">URBAN AESTHETIC EDUCATION</div>
-
-    <h2>
-      从一朵花<br>
-      到一座城市
-    </h2>
-  </div>
-
-  <p>
-    花不是被观看的对象，
-    而是进入成都日常生活的媒介。
-    从观察到创作，从个人参与到社区共创，
-    让美育发生在真实的城市空间里。
-  </p>
-
-</div>
-    <div class="cards edu" id="edu"></div>
-  </div>
-</section>
-    <section class="soft" id="ai"><div class="wrap ai-box"><div class="fade"><div class="eyebrow">AI RONGHUA GUIDE</div>
-
-<h2>问一朵花<br>该去哪里？</h2>
-
-<p class="muted">
-  试试输入：
-  “周末想看芙蓉”
-  “年会只有1小时”
-  “想逛成都老街”
-  “想去古镇”
-  “带孩子做手作”
-</p></div><div class="assistant fade"><div class="ask"><input id="query" value="我周末想看花"><button id="ask">➜</button></div><div id="answer"></div></div></div></section>
-    <section id="collection"><div class="wrap"><div class="section-head fade"><div><div class="eyebrow">Flowerwalk Collection</div><<h2>
-  把成都的<br>
-  一朵花带回家
-</h2></div><p>
-  「蓉花时序」城市花物。
-  不复制景点，而是把木芙蓉、
-  成都茶馆、竹编与市井生活转译成
-  可以被收藏的城市记忆。
-</p></div><div class="products" id="products"></div></div></section>
-    <section class="vision">
-
-  <div class="wrap fade">
-
-    <div class="eyebrow">
-      RONGHUA · URBAN AESTHETIC EDUCATION
-    </div>
-
-    <h2>
-      让花回到生活<br>
-      让美育发生在城市
-    </h2>
-
-    <p class="lead">
-      一朵木芙蓉，从城市音乐厅出发，
-      经过公园、茶馆、老街、社区与古镇。
-      <br><br>
-      我们不创造新的城市，
-      而是重新发现已经存在的美。
-    </p>
-
-  </div>
-
-</section>
-      <section class="soft" id="conference">
-
-  <div class="wrap">
-
-    <div class="section-head fade">
-
-      <div>
-        <div class="eyebrow">
-          2026 ANNUAL CONFERENCE
+    <section id="map">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div>
+            <div class="eyebrow">ROUTE SYSTEM</div>
+            <h2>A 线都会市井<br>B 线天府古镇</h2>
+          </div>
+          <p>大赛示范路线适合年会嘉宾、学生团队短时间参访；市民常态化路线支持分段打卡；洛带古镇支线回应“空间美学与城乡美育共建”。</p>
         </div>
 
-        <h2>
-          从会场<br>
-          走进成都
-        </h2>
+        <div class="map-layout">
+          <div class="spot-list fade" id="spots"></div>
+          <div class="map fade">
+            <svg viewBox="0 0 820 460" aria-hidden="true">
+              <path d="M92 118 C210 62 304 130 380 156 C472 188 486 286 584 276 C694 264 724 346 628 392 C510 448 424 340 314 360 C200 380 112 310 174 238 C226 177 140 166 92 118Z" fill="none" stroke="rgba(82,107,61,.16)" stroke-width="38" stroke-linecap="round"/>
+              <path d="M92 118 C210 62 304 130 380 156 C472 188 486 286 584 276 C694 264 724 346 628 392 C510 448 424 340 314 360 C200 380 112 310 174 238 C226 177 140 166 92 118Z" fill="none" stroke="#526b3d" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round"/>
+              <path d="M584 276 C650 246 696 196 756 112" fill="none" stroke="#a24336" stroke-width="4" stroke-dasharray="8 12" stroke-linecap="round"/>
+            </svg>
+            <div id="pins"></div>
+            <div class="popup" id="popup"></div>
+          </div>
+        </div>
+
+        <div class="route-cards" style="margin-top:18px">
+          <article class="card route-card fade">
+            <div class="route-band" style="background:#a24336"></div>
+            <div class="route-body">
+              <div class="eyebrow">DEMO / 1.5H</div>
+              <h3>A 线年会示范短路线</h3>
+              <ol><li>成都城市音乐厅</li><li>少城・祠堂街</li></ol>
+              <div class="route-meta"><span class="chip">会场联动</span><span class="chip">老街烟火</span></div>
+              <p>适合年会间隙，以最短距离完成“项目概念 + 成都街巷”的体验闭环。</p>
+            </div>
+          </article>
+          <article class="card route-card fade">
+            <div class="route-band" style="background:#526b3d"></div>
+            <div class="route-body">
+              <div class="eyebrow">CITIZEN / HALF DAY</div>
+              <h3>A 线市民完整漫游线</h3>
+              <ol><li>城市音乐厅</li><li>人民公园</li><li>少城・祠堂街</li><li>小雅公园</li></ol>
+              <div class="route-meta"><span class="chip">赏花</span><span class="chip">茶馆</span><span class="chip">社区工坊</span></div>
+              <p>适合市民分段打卡，支持小程序预约、上传影像和收藏点位。</p>
+            </div>
+          </article>
+          <article class="card route-card fade">
+            <div class="route-band" style="background:#b68255"></div>
+            <div class="route-body">
+              <div class="eyebrow">TOWN / ONE DAY</div>
+              <h3>B 线洛带古镇支线</h3>
+              <ol><li>洛带古镇老街广场</li><li>客家会馆外围</li><li>芙蓉种植田块</li></ol>
+              <div class="route-meta"><span class="chip">客家民俗</span><span class="chip">乡土美育</span></div>
+              <p>把城区共创成果带到古镇，也让古镇种子、故事与手艺回流城区。</p>
+            </div>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <p>
-        2026年12月5日，
-        中国艺术管理教育学会第二十一届年会
-        在成都城市音乐厅举办。
-        项目以会场为城市枢纽，
-        将“寒蓉冬藏”转化为一场可被现场体验的微型示范。
-      </p>
+    <section id="season" class="soft">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div>
+            <div class="eyebrow">THREE ACTS</div>
+            <h2>严格跟随<br>木芙蓉物候</h2>
+          </div>
+          <p>木芙蓉不只在盛花期被观看。页面按 9-10 月盛放、10-11 月凋零、12-次年 2 月枯寂组织活动，避免概念和时间错位。</p>
+        </div>
 
-    </div>
+        <div class="season-board">
+          <div class="season-tabs fade" id="seasonTabs"></div>
+          <div class="season-detail fade">
+            <div class="season-art" id="seasonArt"></div>
+            <div id="seasonDetail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="cards">
+    <section id="posters">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div>
+            <div class="eyebrow">ACTIVITY POSTER SYSTEM</div>
+            <h2>蓉花三幕<br>活动小帖</h2>
+          </div>
+          <p>把盛放、落蓉与冬藏分别转化为可张贴、可替换、可延展的活动小帖。后续有实拍图时，可直接替换这些占位图。</p>
+        </div>
 
-      <article class="card fade">
-        <div class="icon">01</div>
-        <h3>枯寂之美</h3>
-        <p>
-          枯枝样品、全年市民共创作品与影像，
-          构成蓉花生命周期微型展。
-        </p>
-      </article>
+        <div class="poster-grid">
+          <article class="poster fade">
+            <img src="assets/poster-flower-signal.png" alt="花比季节更早出现海报">
+            <div class="poster-caption">
+              <div class="eyebrow">9-10 月 / 盛放</div>
+              <h3>花期前置信号</h3>
+              <p>用于人民公园导赏与花期提示，建立“看见蓉花”的第一层感知。</p>
+            </div>
+          </article>
+          <article class="poster fade">
+            <img src="assets/poster-citywalk-history.png" alt="成都历史文脉 City Walk 海报">
+            <div class="poster-caption">
+              <div class="eyebrow">少城・祠堂街 / 漫游</div>
+              <h3>城市漫游计划</h3>
+              <p>用于街巷导览与年会短路线，强化成都历史文脉与市井步行感。</p>
+            </div>
+          </article>
+          <article class="poster fade">
+            <img src="assets/poster-sichuan-bamboo.png" alt="蜀地风物竹编快闪海报">
+            <div class="poster-caption">
+              <div class="eyebrow">人民公园 / 手艺</div>
+              <h3>蜀地风物快闪</h3>
+              <p>用于竹编芙蓉装置、手艺人快闪和社区共创活动。</p>
+            </div>
+          </article>
+          <article class="poster fade">
+            <img src="assets/poster-gaiwan-tea.png" alt="盖碗茶套餐活动海报">
+            <div class="poster-caption">
+              <div class="eyebrow">茶馆 / 落蓉再生</div>
+              <h3>盖碗茶趣体验</h3>
+              <p>用于茶馆流动工坊、落花手作和“盖碗茶下话芙蓉”。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-      <article class="card fade">
-        <div class="icon">02</div>
-        <h3>蓉种冬藏</h3>
-        <p>
-          参会嘉宾领取芙蓉种子，
-          将一次会议体验变成下一季花事的开始。
-        </p>
-      </article>
+    <section class="soft">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div>
+            <div class="eyebrow">MINI PROGRAM</div>
+            <h2>小程序<br>把漫游变成长期运营</h2>
+          </div>
+          <p>数字端不做复杂炫技，而是服务路线导航、活动预约、蓉花时序档案和年会专题板块，让短期示范可以沉淀为常态化项目。</p>
+        </div>
+        <div class="mini-program">
+          <article class="phone fade"><div class="screen"></div><h3>漫游地图</h3><p>A 线、B 线、年会短路线、市民完整线可切换。</p></article>
+          <article class="phone fade"><div class="screen"></div><h3>活动预约</h3><p>区分城区场和古镇场，公益名额优先向本地居民开放。</p></article>
+          <article class="phone fade"><div class="screen"></div><h3>时序档案</h3><p>市民上传盛放、落花、枯枝和种子照片，形成城市花事资料库。</p></article>
+          <article class="phone fade"><div class="screen"></div><h3>年会专题</h3><p>展示 2026 年会现场微展、种子交换和示范路线影像。</p></article>
+        </div>
+      </div>
+    </section>
 
-      <article class="card fade">
-        <div class="icon">03</div>
-        <h3>会场 → 城市</h3>
-        <p>
-          从成都城市音乐厅出发，
-          1.5小时进入少城祠堂街，
-          完成年会示范短路线。
-        </p>
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
+    <section id="conference" class="conference">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div>
+            <div class="eyebrow">ANNUAL CONFERENCE DEMO KIT</div>
+            <h2>2026.12.5<br>年会示范活动包</h2>
+          </div>
+          <p>年会时间落在第三幕“寒蓉冬藏”。因此现场示范不再强行做赏花，而是把枯枝、种子、年度共创作品和数字地图转化为可触摸、可讲述、可带走的展示。</p>
+        </div>
+        <div class="cards">
+          <article class="card fade"><div class="num">01 / 微型成果展</div><h3>成都城市音乐厅回廊</h3><p>枯枝样品、手作实物、项目展板、市民影像，全部使用可回收材料并在会后复原场地。</p></article>
+          <article class="card fade"><div class="num">02 / 蓉种冬藏体验站</div><h3>种子 + 手册 + 交换</h3><p>参会嘉宾领取芙蓉种子和项目手册，把一次会议体验延伸到下一季花事。</p></article>
+          <article class="card fade"><div class="num">03 / 三条体验选择</div><h3>短线、长线、古镇线</h3><p>1.5 小时音乐厅到少城；半天城市完整线；一日洛带古镇调研支线。</p></article>
+        </div>
+      </div>
+    </section>
   </main>
- <footer>
-  <div class="wrap">
 
-    蓉花时序 · 成都城市花卉漫游与市井美育计划
+  <footer>
+    <div class="wrap">蓉花时序・成都木芙蓉花卉城市漫游美育项目 <span style="float:right">CHENGDU · 2026</span></div>
+  </footer>
 
-    <span style="float:right">
-      CHENGDU · 2026
-    </span>
-
-  </div>
-</footer>
   <script>
-    const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-    const intro=[["城市漫游","以花卉为线索重组城市步行体验，把公园、街区和历史空间串联成柔和路线。","⌁"],["花期导航","用月份、花种与盛放状态组织信息，让赏花从偶遇变成可以计划的城市日程。","◷"],["美育体验","从观察、记录到创作，鼓励市民在花卉中建立审美、自然知识和表达能力。","✎"],["文创互动","将城市花卉转译为原创 IP 与收藏物，让一次漫步留下可被带走的品牌记忆。","◌"]];
-   const spots = [
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => [...document.querySelectorAll(s)];
 
-  [
-    "成都城市音乐厅",
-    "枢纽窗口",
-    "全年",
-    "时序展览 · 年会示范 · 小程序入口",
-    "项目城市总入口。利用户外广场与公共回廊，不改变剧场主体，以轻量展架、可回收装置和数字入口展示蓉花时序。",
-    16,
-    30
-  ],
+    const spots = [
+      ["成都城市音乐厅","枢纽窗口点","全年 / 年会核心","时序概念展、小程序入口、枯寂之美微展、蓉种冬藏体验站","项目总入口，把年会会场与城市漫游连接起来。",14,28,false],
+      ["人民公园","经典公园点","9 月-次年 2 月","蓉花民俗导赏、盖碗茶分享、惜花拾落、露天手作、冬藏茶话会","以公园茶座和芙蓉片区承接市民赏花与低门槛美育。",36,46,false],
+      ["少城・祠堂街","市井老街点","9 月-次年 2 月","街巷导览、微型花集、落花作品巡展、茶馆流动工坊、故事墙","让芙蓉进入橱窗、茶馆、公告栏和老街消费日常。",57,35,false],
+      ["小雅公园","社区金角银边点","9 月-次年 2 月","社区故事会、摄影征集、公益手作、宣传栏展览、种子交换角","面向老人、亲子与周边居民，把美育放到家门口。",66,62,false],
+      ["洛带古镇","天府古镇支线","9 月-次年 2 月","客蓉共赏导赏、客家民俗小市集、落花客家手作、城乡种子互通","城市美育向客家古镇和乡土空间延伸。",83,24,true]
+    ];
 
-  [
-    "人民公园",
-    "经典公园",
-    "9—12月",
-    "蓉花导赏 · 盖碗茶 · 落花手作",
-    "在成都最具生活气息的公共空间之一中观察木芙蓉，将花事与茶文化、市民日常连接。",
-    39,
-    44
-  ],
+    function renderSpots(active = 0){
+      $("#spots").innerHTML = spots.map((s,i)=>`
+        <button class="spot ${i===active ? "active" : ""}" data-i="${i}">
+          <b>${i+1}. ${s[0]}</b>
+          <small>${s[1]} · ${s[2]}</small>
+        </button>
+      `).join("");
+      $("#pins").innerHTML = spots.map((s,i)=>`
+        <button class="pin ${s[7] ? "town" : ""}" data-i="${i}" style="left:${s[5]}%;top:${s[6]}%">${i+1}</button>
+      `).join("");
+      updateSpot(active);
+      $$("#spots button, #pins button").forEach(btn => btn.addEventListener("click", () => updateSpot(Number(btn.dataset.i))));
+    }
 
-  [
-    "少城·祠堂街",
-    "市井老街",
-    "9—11月",
-    "街巷漫游 · 花集 · 流动工坊",
-    "沿街墙面、茶馆橱窗与公共过道成为蓉花展陈界面，让花卉进入真实的城市生活。",
-    59,
-    34
-  ],
+    function updateSpot(i){
+      $$("#spots .spot").forEach((el,n)=>el.classList.toggle("active",n===i));
+      const s = spots[i];
+      $("#popup").innerHTML = `
+        <div class="eyebrow">${s[1]} · ${s[2]}</div>
+        <h3>${s[0]}</h3>
+        <p>${s[4]}</p>
+        <p><b>活动：</b>${s[3]}</p>
+      `;
+    }
 
-  [
-    "小雅公园",
-    "社区金角银边",
-    "9—次年2月",
-    "社区故事会 · 公益手作 · 种子交换",
-    "以社区边角空间为美育落点，让花卉活动从景区走入居民家门口。",
-    67,
-    59
-  ],
+    const seasons = [
+      {
+        time:"9-10 月",
+        name:"第一幕・蓉锦盛放",
+        tone:"#ef8fb6",
+        intro:"木芙蓉进入盛花期，以看花、导赏、摄影、花集和社区故事为主。",
+        activities:[
+          ["城市音乐厅","时序启幕轻量展、蓉花分享会"],
+          ["人民公园","蓉花民俗导赏、竹编芙蓉自然装置"],
+          ["少城・祠堂街","街巷蓉花漫游、微型市井花集"],
+          ["小雅公园 / 洛带","社区故事会、客蓉共赏导赏、客家民俗小市集"]
+        ]
+      },
+      {
+        time:"10-11 月",
+        name:"第二幕・落蓉再生",
+        tone:"#b68255",
+        intro:"只使用自然脱落花瓣与园林修剪材料，把凋零转化为手作、巡展和街巷共创。",
+        activities:[
+          ["城市音乐厅","落蓉共创作品预展、手作人快闪体验摊"],
+          ["人民公园","惜花拾落公益活动、公园露天手作工坊"],
+          ["少城・祠堂街","落花作品街巷巡展、老街流动工坊"],
+          ["小雅公园 / 洛带","社区公益手作、落花客家手作融合工坊、古镇巡展"]
+        ]
+      },
+      {
+        time:"12-次年 2 月",
+        name:"第三幕・寒蓉冬藏",
+        tone:"#526b3d",
+        intro:"年会正处于枯寂阶段，因此重点转向枯枝、种子、年度影像和城乡交换。",
+        activities:[
+          ["城市音乐厅","《枯寂之美》概念微型展、蓉种冬藏交换体验站、小程序现场演示"],
+          ["人民公园","枯枝大地微艺术、冬藏茶话会"],
+          ["少城・祠堂街","街巷枯枝装饰、市民故事墙"],
+          ["小雅公园 / 洛带","社区枯枝装置、种子交换角、乡土枯枝大地艺术、城乡种子互通"]
+        ]
+      }
+    ];
 
-  [
-    "洛带古镇",
-    "天府古镇支线",
-    "9—次年2月",
-    "客蓉共赏 · 客家手作 · 城乡种子交换",
-    "作为都会市井主线的乡土延伸，将木芙蓉、客家文化与古镇日常连接，探索城乡美育共建。",
-    81,
-    73
-  ]
+    function renderSeasons(active = 0){
+      $("#seasonTabs").innerHTML = seasons.map((s,i)=>`
+        <button class="season-tab ${i===active ? "active" : ""}" data-i="${i}">
+          <div class="eyebrow">${s.time}</div>
+          <h3>${s.name}</h3>
+        </button>
+      `).join("");
+      $$("#seasonTabs button").forEach(btn => btn.addEventListener("click", () => renderSeasonDetail(Number(btn.dataset.i))));
+      renderSeasonDetail(active);
+    }
 
-];
-   const routes = [
-  [
-    "A线 · 年会示范短路线",
-    "成都城市音乐厅 → 少城·祠堂街",
-    "1.5小时",
-    "会场出发 · 市井漫游 · 蓉花时序",
-    "var(--vermillion)"
-  ],
-  [
-    "A线 · 都会市井完整线",
-    "城市音乐厅 → 人民公园 → 祠堂街 → 小雅公园",
-    "半日",
-    "公园 · 茶馆 · 老街 · 社区",
-    "var(--sage)"
-  ],
-  [
-    "B线 · 天府古镇支线",
-    "洛带古镇老街 → 客家会馆外围 → 芙蓉种植田块",
-    "一日",
-    "客家乡土 · 花事 · 城乡美育",
-    "var(--tea)"
-  ],
-  [
-    "蓉花三幕 · 全周期漫游",
-    "盛放 9—10月 → 凋零 10—11月 → 枯寂 12—次年2月",
-    "全年",
-    "观察 · 共创 · 冬藏",
-    "var(--rose)"
-  ]
-];
-    const months = [
+    function renderSeasonDetail(i){
+      $$("#seasonTabs button").forEach((el,n)=>el.classList.toggle("active",n===i));
+      const s = seasons[i];
+      $("#seasonArt").style.background = `
+        radial-gradient(circle at 50% 42%, ${s.tone} 0 22%, transparent 23%),
+        radial-gradient(circle at 36% 50%, rgba(248,200,216,.9) 0 23%, transparent 24%),
+        radial-gradient(circle at 63% 57%, rgba(219,65,112,.72) 0 20%, transparent 21%),
+        repeating-linear-gradient(30deg, rgba(82,107,61,.18) 0 4px, transparent 4px 10px),
+        #eadc45`;
+      $("#seasonDetail").innerHTML = `
+        <div class="eyebrow">${s.time}</div>
+        <h3>${s.name}</h3>
+        <p>${s.intro}</p>
+        <div class="activity-grid">
+          ${s.activities.map(a=>`<div class="activity"><b>${a[0]}</b><span>${a[1]}</span></div>`).join("")}
+        </div>
+      `;
+    }
 
-  [
-    "09—10月",
-    "蓉锦盛放",
-    "成都城市音乐厅、人民公园、少城·祠堂街、小雅公园、洛带古镇",
-    "木芙蓉进入盛放期。以赏花、导赏、摄影和城市漫游为主，让市民重新发现成都日常空间中的蓉花。"
-  ],
+    renderSpots();
+    renderSeasons();
 
-  [
-    "10—11月",
-    "落蓉再生",
-    "人民公园、少城·祠堂街、小雅公园、洛带古镇",
-    "木芙蓉自然落花成为新的美育材料。通过拾落、压花、香囊、芙蓉笺与街巷巡展，让花从盛放走向再生。"
-  ],
-
-  [
-    "12—02月",
-    "寒蓉冬藏",
-    "成都城市音乐厅、人民公园、小雅公园、洛带古镇",
-    "进入枯寂阶段。利用修剪枯枝、种子和全年共创作品，开展微艺术、种子交换与年度回望。"
-  ]
-
-];
-    // 1. 确保 edu 数组的图片路径与你文件名完全一致
-const edu = [
-
-  [
-    "看见蓉花",
-    "从花色、枝叶、气味与物候开始，重新认识每天经过却很少停留的城市植物。",
-    "看见蓉花.jpg",
-    "data.html"
-  ],
-
-  [
-    "拾落成艺",
-    "只使用自然落花与园林修剪材料，通过压花、芙蓉笺、香囊与枯枝共创，把生命周期转化为创作。",
-    "拾落成艺.jpg",
-    "activity.html"
-  ],
-
-  [
-    "花在街巷",
-    "让市民作品进入茶馆橱窗、社区公告栏与古镇街巷，让美育成果回到真实的日常生活。",
-    "花在街巷.jpg",
-    "upload.html"
-  ]
-
-];
-
-$("#edu").innerHTML = edu.map(item => `
-    <a href="${item[3]}" class="card fade">
-        <div class="card-img" style="background-image: url('${item[2]}'); background-color: #f0f0f0;"></div>
-        <h3>${item[0]}</h3>
-        <p>${item[1]}</p>
-    </a>
-`).join("");
-    const ai = [
-
-  [
-    "周末,看花,芙蓉,盛放,9月,10月",
-    "人民公园",
-    "蓉锦盛放",
-    "A线 · 都会市井完整线",
-    "蓉花导赏 · 盖碗茶下话芙蓉",
-    "从人民公园开始，在茶馆与花树之间慢慢认识成都的花事。"
-  ],
-
-  [
-    "年会,音乐厅,12月,专家,参会,路线",
-    "成都城市音乐厅",
-    "寒蓉冬藏",
-    "A线 · 年会示范短路线",
-    "枯寂之美 · 蓉种冬藏 · 小程序体验",
-    "从年会会场直接进入项目展示空间，1.5小时完成从会场到城市的蓉花漫游。"
-  ],
-
-  [
-    "老街,茶馆,市井,祠堂街,成都",
-    "少城·祠堂街",
-    "落蓉再生",
-    "A线 · 都会市井完整线",
-    "街巷巡展 · 流动工坊",
-    "沿老街寻找市民共创作品，在茶馆里体验落花手作。"
-  ],
-
-  [
-    "社区,老人,亲子,儿童,公益,手作",
-    "小雅公园",
-    "落蓉再生",
-    "A线 · 都会市井完整线",
-    "社区公益手作 · 种子交换",
-    "把花卉美育带到家门口，优先服务社区居民。"
-  ],
-
-  [
-    "古镇,洛带,客家,一日,乡土",
-    "洛带古镇",
-    "蓉花三幕",
-    "B线 · 天府古镇支线",
-    "客蓉共赏 · 客家手作 · 城乡种子交换",
-    "从成都城区进入天府古镇，把花事、乡土文化与城乡美育连接起来。"
-  ]
-
-];
-    const products = [
-
-  [
-    "Ronghua Puff",
-    "蓉花小团",
-    "一朵软软的木芙蓉，把成都的慢生活装进掌心。",
-    "#E9B8B5",
-    "#879B78"
-  ],
-
-  [
-    "Tea Rong",
-    "盖碗蓉",
-    "把成都茶馆与木芙蓉结合成一枚可以随身携带的城市花物。",
-    "#D8C6AA",
-    "#879B78"
-  ],
-
-  [
-    "Winter Rong",
-    "冬藏小蓉",
-    "从盛放到枯寂，一枚记录木芙蓉完整生命周期的花期纪念物。",
-    "#D9D4C9",
-    "#A94B43"
-  ]
-
-];
-    function card([t,d,i]){return `<article class="card fade"><div class="icon">${i}</div><h3>${t}</h3><p>${d}</p></article>`}
-    $("#intro").innerHTML=intro.map(card).join(""); 
-    function showSpot(i){$$(".spot").forEach((e,n)=>e.classList.toggle("active",n===i));const s=spots[i];$("#popup").innerHTML=`<h3>${s[0]}</h3><p>花种：${s[1]}</p><p>花期：${s[2]}</p><p>${s[4]}</p><p><b>${s[3]}</b></p>`}
-    $("#spots").innerHTML=spots.map((s,i)=>`<button class="spot ${i===0?'active':''}" data-i="${i}"><b>${s[0]}</b><span>${s[1]} · ${s[2]}</span></button>`).join("");
-    $("#pins").innerHTML=spots.map((s,i)=>
-  `<a href="map.html?spot=${i}" class="pin" data-i="${i}" style="left:${s[5]}%;top:${s[6]}%">${i+1}</a>`
-).join(""); showSpot(0);
-    $$("#spots .spot").forEach(b=>b.onclick=()=>showSpot(+b.dataset.i));
-    $("#routesList").innerHTML=routes.map((r,i)=>`<article class="card route fade"><div class="bar" style="background:${r[4]}"></div><p class="muted">Route 0${i+1} · ${r[2]}</p><h3 class="big">${r[0]}</h3><p>${r[1]}</p><p class="muted">${r[3]}</p><button class="btn">收藏路线 →</button></article>`).join("");
-    function showMonth(i){$$(".tab").forEach((e,n)=>e.classList.toggle("active",n===i));const m=months[i];$("#monthDetail").innerHTML=`<div class="eyebrow">${m[0]} · ${m[1]}</div><h3>${m[1]}花期</h3><p>${m[3]}</p><p><b>推荐地点：</b>${m[2]}</p>`}
-    $("#months").innerHTML=months.map((m,i)=>`<button class="tab ${i===0?'active':''}" data-i="${i}"><span>${m[0]}</span><h3>${m[1]}</h3></button>`).join(""); $$(".tab").forEach(b=>b.onclick=()=>showMonth(+b.dataset.i)); showMonth(0);
-    function ask(){const q=$("#query").value;const r=ai.find(x=>x[0].split(",").some(k=>q.includes(k)))||ai[0];$("#answer").innerHTML=[["推荐地点",r[1]],["当前状态",r[2]],["推荐路线",r[3]],["推荐活动",r[4]]].map(x=>`<div class="result"><span>${x[0]}</span><b>${x[1]}</b></div>`).join("")+`<p class="calendar-detail">${r[5]}</p>`} $("#ask").onclick=ask; $("#query").onkeydown=e=>{if(e.key==="Enter")ask()}; ask();
-    $("#products").innerHTML=products.map((p,i)=>`<article class="card product fade"><div class="product-art" style="background:linear-gradient(135deg,${p[3]},${p[4]})"><span class="tag">Flower Walk Original</span><div class="plush" style="background:radial-gradient(circle at 34% 28%,#fff,${p[3]} 46%,${p[4]})"><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span></div></div><div style="padding:22px"><button class="save" data-id="${i}">♡</button><h3>${p[0]}</h3><p class="muted">${p[1]}</p><p>${p[2]}</p><button class="btn primary">加入收藏</button></div></article>`).join("");
-    const saved=new Set(JSON.parse(localStorage.getItem("fw-saved")||"[]")); function paintSave(){ $$(".save").forEach(b=>{const on=saved.has(b.dataset.id);b.classList.toggle("on",on);b.textContent=on?"♥":"♡"})} $$(".save").forEach(b=>b.onclick=()=>{saved.has(b.dataset.id)?saved.delete(b.dataset.id):saved.add(b.dataset.id);localStorage.setItem("fw-saved",JSON.stringify([...saved]));paintSave()}); paintSave();
-    for(let i=0;i<18;i++){const p=document.createElement("span");p.className="petal";p.style.left=((i*13)%100)+"%";p.style.animationDelay=((i%8)*.8)+"s";p.style.animationDuration=(10+i%7)+"s";p.style.setProperty("--drift",(i%2? -70-i*3:80+i*4)+"px");$("#petals").appendChild(p)}
-    for(let i=0;i<24;i++){const b=document.createElement("span");b.className="bloom";b.style.width=b.style.height=(30+(i%5)*9)+"px";b.style.left=(4+(i*11)%88)+"%";b.style.bottom=(8+(i*17)%58)+"%";b.style.background=i%3===0?"#F3D7D7":i%3===1?"#F7E0E0":"#FAF8F5";$("#visual").appendChild(b)}
-    $("#theme").onclick=()=>{document.documentElement.classList.toggle("dark");localStorage.setItem("fw-theme",document.documentElement.classList.contains("dark")?"dark":"light")}; if(localStorage.getItem("fw-theme")==="dark")document.documentElement.classList.add("dark");
-    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")}),{threshold:.15}); $$(".fade").forEach(e=>io.observe(e));
-    
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, {threshold:.12});
+    $$(".fade").forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
